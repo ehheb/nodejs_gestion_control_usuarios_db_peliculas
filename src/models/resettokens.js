@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class ResetTokens extends Model {
 
     static associate(models) {
+      //Pertenece al id usuario de la tabla Users
       this.belongsTo(models.Users, {
         foreignKey: 'userId'
       });
