@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   ResetTokens.init({
     userId: DataTypes.INTEGER,
-    token: DataTypes.STRING,
+    token: DataTypes.UUID,
     expirationDate: DataTypes.DATE,
     active: DataTypes.BOOLEAN
   }, {

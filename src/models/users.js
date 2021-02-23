@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    resetToken: DataTypes.STRING
+    //resetToken: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Users',

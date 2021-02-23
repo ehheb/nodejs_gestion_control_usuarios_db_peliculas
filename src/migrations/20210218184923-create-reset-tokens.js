@@ -16,7 +16,7 @@ module.exports = {
         }
       },
       token: {
-        type: Sequelize.STRING
+        type: Sequelize.UUID
       },
       expirationDate: {
         type: Sequelize.DATE
