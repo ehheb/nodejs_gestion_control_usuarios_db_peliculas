@@ -1,0 +1,114 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Proyecto final NodeJS",
+        "version": "1.0.0",
+        "description": "Creación y gestión de usuarios en el backend utilizando nodeJS y postgres como base de datos",
+        "contact": {
+            "name": "Hebert Villarreal",
+            "email": "hebertvillarreal1@gmail.com"
+        }
+    },
+    "paths": {
+        "/signup":{
+            "post":{
+                "tags": ["Auth"],
+                "requestBody":{
+                    "content": {
+                        "aplication/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Users"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se ha agregado a un nuevo usuario"
+                    }
+                }
+            }
+        },
+        "/login":{
+            "post":{
+                "tags": ["Auth"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email":{
+                                        "type": "string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se ha iniciado sesión de manera correcta"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": ["Users"],
+                "responses": {
+                    "200":{
+                        "description": "Obtener a todos los usuarios"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "jwt": {
+                "type": "http",
+                "scheme": "bearer",
+                "description": "JSON web token"
+            }
+        },
+        "schemas": {
+            "Users": {
+                "type": "object",
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName":{
+                        "type": "string"
+                    },
+                    "email":{
+                        "type": "string"
+                    },
+                    "password":{
+                        "type":"string",
+                        "minLength": 8
+                    }
+                }
+            }
+        }
+    }
+}

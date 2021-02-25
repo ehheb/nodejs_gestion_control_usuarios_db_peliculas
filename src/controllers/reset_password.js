@@ -42,17 +42,17 @@ export const updatePassword = async(req, res) => {
     const token = req.body.token;
     try {
         //FALTA VALIDACION DE TOKEN a UIID
-        //FALTA VALIDACION DE LA CONTRASEÑA A >= 8 CARACTERES
+        //FALTA VALIDACION DE LA CONTRASEÑA A >= 8 CARACTERES y con bcrypt
         const findToken = await ResetTokens.findOne({where : {token: token}});
 
-        //Si se valida el token se tomará la fecha actual y la fecha del token
+        //Valida que se encuentre el token dentro de la bd y valida si este token se encuentra en activo
         if(findToken && findToken.active == true) {
             //Tiempo del token
             const expirationToken = findToken.expirationDate;
             //Tiempo actual
             const date = new Date();
 
-            //Se valida si el token sigue vigente
+            //Valida si el token sigue vigente
             if(moment(date).isBefore(expirationToken)){
                 //Se realiza el cambio de contraseña dentro de la base de datos
                 const userId = findToken.userId;
@@ -85,7 +85,7 @@ export const updatePassword = async(req, res) => {
             }
 
         } else {
-            return res.status(401).json({
+            return res.status(403).json({
                 message: "Token invalido o ya utilizado"
             });
         }
