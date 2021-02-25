@@ -11,6 +11,7 @@ export const signup = async (req, res) => {
         const emailLowerCase = email.toLowerCase();
         const regExp = /^(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ]/;
         req.body.email = emailLowerCase;
+        
         const validateEmail = await Users.findOne({where:{email : emailLowerCase}});
         
         if((firstName == "") || (lastName == "") || (email == "") || (password == "")) {
@@ -39,7 +40,10 @@ export const signup = async (req, res) => {
         }
 
     } catch(error) {
-        console.log(error);
+        res.status(500).json({
+            message: "Hubo un problema con la conexión del servidor",
+            error
+        })
     }
 }
 

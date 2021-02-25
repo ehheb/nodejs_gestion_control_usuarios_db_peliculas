@@ -49,6 +49,10 @@ export const login = async(req, res) => {
             })
         }
     } catch (error) {
-        console.log(error);
+        res.status(500).json({
+            message: "Hubo un problema con la conexión en el servidor",
+            error
+        })
+        //console.log(error);
     }
 } 
