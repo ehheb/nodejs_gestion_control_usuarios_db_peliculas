@@ -15,28 +15,11 @@ export const login = async(req, res) => {
             const token = generateJWT(results);
             
             if(comparePass) {
-                res.status(200).json({
+                return res.status(200).json({
                     message: "Credenciales correctas",
                     results,
                     token
                 });
-
-            //Se crea un nuevo password dentro de la tabla reset tokens
-            // const id = results.id;
-            // const expirationDate = new Date();
-            // expirationDate.setHours (expirationDate.getHours() + 1);
-            // req.body.userId = id;
-            // req.body.token = uuid(token);
-            // req.body.expirationDate = expirationDate;
-            // req.body.active = true;
-
-                
-            // const createToken = await ResetTokens.create(req.body);
-            // return res.status(200).json({
-            //     message: "Token guardado con éxito, credenciales correctas",
-            //     createToken
-            // })    
-
 
             } else {
                 return res.status(401).json({
@@ -49,7 +32,7 @@ export const login = async(req, res) => {
             })
         }
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: "Hubo un problema con la conexión en el servidor",
             error
         })

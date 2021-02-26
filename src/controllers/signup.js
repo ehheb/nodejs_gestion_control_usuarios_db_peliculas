@@ -22,12 +22,12 @@ export const signup = async (req, res) => {
         } if(!regExp.test(password)) {
             return res.status(400).json({
                 message: "Constraseña no valida, solamente debe de contener al menos una letra mayúscula, una letra minúscula y un número"
-            })
+            });
 
         } if(validateEmail) {
             return res.status(401).json({
                 message: "Correo anteriormente registrado"
-            })
+            });
         } else {
             
             const encryptedPass = bcrypt.hashSync(password, 10);
@@ -40,10 +40,10 @@ export const signup = async (req, res) => {
         }
 
     } catch(error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: "Hubo un problema con la conexión del servidor",
             error
-        })
+        });
     }
 }
 
