@@ -13,6 +13,7 @@ export const login = async(req, res) => {
         if(results) {
             const comparePass = bcrypt.compareSync(password, results.password);
             const token = generateJWT(results);
+            console.log(comparePass);
             
             if(comparePass) {
                 return res.status(200).json({

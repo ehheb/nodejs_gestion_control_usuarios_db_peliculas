@@ -2,6 +2,7 @@ import {Users, ResetTokens} from "../models/";
 import sendEmail from "../utils/nodemailer";
 import {v4 as uuid} from "uuid";
 import moment from "moment";
+import bcrypt from "bcrypt";
 
 export const resetPassword = async(req, res) => {
     const email = req.body.email;
@@ -57,7 +58,9 @@ export const updatePassword = async(req, res) => {
                 //Se realiza el cambio de contraseña dentro de la base de datos
                 const userId = findToken.userId;
                 const password = req.body.password;
-                await Users.update({password: password},{where: {id: userId}});
+                const encryptedPass = bcrypt.hashSync(password, 10);
+                req.body.password = encryptedPass;
+                await Users.update({password: encryptedPass},{where: {id: userId}});
 
                 //Se cambia a falso el estado del token
                 findToken.active = false;

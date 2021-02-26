@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import auth from "../routes/auth";
+import app from "../app";
 import {Users} from  "../models/";
 
 describe("Probando el registro de usuarios", () => {
@@ -13,7 +13,7 @@ describe("Probando el registro de usuarios", () => {
             password: "Hector3216"
         }
         //assert
-        const response = await supertest(auth).post("/signup").send(userObj);
+        const response = await supertest(app).post("/signup").send(userObj);
         
         //act
         expect(response.status).toBe(201);

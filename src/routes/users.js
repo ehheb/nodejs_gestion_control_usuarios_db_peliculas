@@ -1,13 +1,11 @@
 import express from "express";
+import {findAllUsers, findOneUser} from "../controllers/get_users";
 
 
 const router = express.Router();
 
-router.get("/users", signup);
-router.get("/users:id", signup);
-router.post("/users", login);
-router.put("/users/:id"/* , resetPassword */);
-router.delete("/users/:id"/* , resetPassword */);
+router.get("/users", findAllUsers);
+router.get("/users/:id", findOneUser);
 
 
 export default router;

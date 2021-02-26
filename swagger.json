@@ -10,12 +10,13 @@
         }
     },
     "paths": {
-        "/signup":{
+        "/api/v1/signup":{
             "post":{
+                "description": "Registro de nuevos usuarios y valida que el email no se encuentre previamente registrado",
                 "tags": ["Auth"],
                 "requestBody":{
                     "content": {
-                        "aplication/json":{
+                        "application/json":{
                             "schema":{
                                 "$ref": "#/components/schemas/Users"
                             }
@@ -29,8 +30,9 @@
                 }
             }
         },
-        "/login":{
+        "/api/v1/login":{
             "post":{
+                "description": "Inicio de sesión por medio del email y la contraseña",
                 "tags": ["Auth"],
                 "requestBody":{
                     "content": {
@@ -52,6 +54,59 @@
                 "responses": {
                     "201":{
                         "description": "Se ha iniciado sesión de manera correcta"
+                    }
+                }
+            }
+        },
+        "/api/v1/reset-password": {
+            "post":{
+                "description": "Se manda un token de autorización al email propocionado para restablecer la constraseña",
+                "tags": ["Auth"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se envió el token de reestablecimiento al correo electrónico proporcionado"
+                    }
+                }
+            }
+        },
+        "/api/v1/update-password":{
+            "put":{
+                "description": "Se coloca el token recibido al email y se coloca la nueva contraseña",
+                "tags": ["Auth"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties": {
+                                    "token":{
+                                        "type":"string"
+                                    },
+                                    "password":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "La constraseña se restableció de manera éxitosa"
                     }
                 }
             }
@@ -100,8 +155,7 @@
                         "type": "string"
                     },
                     "password":{
-                        "type":"string",
-                        "minLength": 8
+                        "type":"string"
                     }
                 }
             }
