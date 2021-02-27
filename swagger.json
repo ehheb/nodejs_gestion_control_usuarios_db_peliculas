@@ -83,10 +83,18 @@
                 }
             }
         },
-        "/api/v1/update-password":{
+        "/api/v1/users/{userId}/update-password":{
             "put":{
                 "description": "Se coloca el token recibido al email y se coloca la nueva contraseña",
                 "tags": ["Auth"],
+                "parameters": [
+                    {
+                        "schema":{},
+                        "in": "path",
+                        "name": "userId",
+                        "required": true
+                    }
+                ],
                 "requestBody":{
                     "content": {
                         "application/json":{

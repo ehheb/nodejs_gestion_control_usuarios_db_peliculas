@@ -46,8 +46,7 @@ const sendEmail = (to, token, userId) => {
     to,
     subject: "Restablecimiento de la contraseña en nodemailer",
     generateTextFromHTML: true,
-    html: `<p>El token de restablecimiento es: ${token}</p>
-        <p>El id del usuario es: ${userId} </p>`
+    html: `<a href='http://proyectofinalnodejs/nueva-contraseña?token=${token}&userId=${userId}'>Restablece tu contraseña aquí</a>`
 }
 
     smtpTransport.sendMail(mailOptions, (error, info) => {

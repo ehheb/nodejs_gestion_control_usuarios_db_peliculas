@@ -9,7 +9,7 @@ router.post("/signup", signup);
 router.post("/login", login);
 router.post("/reset-password", resetPassword);
 //router.post("/update-password", updatePassword);
-router.put("/update-password", updatePassword);
+router.put("/users/:userId/update-password/", updatePassword);
 
 
 export default router;
