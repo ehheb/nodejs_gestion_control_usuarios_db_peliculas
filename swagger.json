@@ -111,12 +111,92 @@
                 }
             }
         },
-        "/users": {
+        "/api/v1/users": {
             "get": {
+                "description": "Primeramente se debe de iniciar sesión, dentro del response body se encuentra el token, este se debe de copiar y se debe de colocar dentro de la casilla de Authorize",
                 "tags": ["Users"],
                 "responses": {
                     "200":{
                         "description": "Obtener a todos los usuarios"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/users/{id}":{
+            "get":{
+                "description": "Primeramente se debe de iniciar sesión, dentro del response body se encuentra el token, este se debe de copiar y se debe de colocar dentro de la casilla de Authorize",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "schema":{},
+                        "in": "path",
+                        "name": "id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Obteniendo un usuario por el id"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/roles":{
+            "post":{
+                "description": "Agregar un nuevo rol, se debe de iniciar sesión para generar un nuevo token y colocarlo en la casilla de Authorize para poder agregar un nuevo rol",
+                "tags": ["Roles"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Roles"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se ha creado el rol de manera éxitosa"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/users/{userId}/roles/{roleId}":{
+            "post":{
+                "description": "Agregar un nuevo rol a un usuario o actualizar el rol de un usuario, se debe de iniciar sesión para generar un nuevo token el cual se encuentra en el response body, este token se debe de colocar en la casilla de Authorize \n\nRoles: \n1. Administrador \n2. Editor",
+                "tags": ["Roles"],
+                "parameters": [
+                    {
+                        "schema":{},
+                        "in": "path",
+                        "name": "userId",
+                        "required": true
+                    },
+                    {
+                        "schema":{},
+                        "in": "path",
+                        "name": "roleId",
+                        "required": true    
+                    }
+                ],
+                "responses": {
+                    "201":{
+                        "description": "Se añadió o se actualizó un nuevo rol al usuario"
                     }
                 },
                 "security": [
@@ -132,6 +212,7 @@
             "jwt": {
                 "type": "http",
                 "scheme": "bearer",
+                "bearerFormat": "JWT",
                 "description": "JSON web token"
             }
         },
@@ -155,7 +236,33 @@
                         "type": "string"
                     },
                     "password":{
-                        "type":"string"
+                        "type": "string"
+                    }
+                }
+            },
+            "Roles":{
+                "type":"object",
+                "required":[
+                    "name"
+                ],
+                "properties":{
+                    "name":{
+                        "type": "string"
+                    }
+                }
+            },
+            "UserRoles":{
+                "type": "object",
+                "required": [
+                    "userId",
+                    "roleId"
+                ],
+                "properties": {
+                    "userId":{
+                        "type": "integer"
+                    },
+                    "roleId":{
+                        "type": "integer"
                     }
                 }
             }

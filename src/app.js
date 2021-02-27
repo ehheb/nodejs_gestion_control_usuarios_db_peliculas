@@ -20,12 +20,12 @@ app.use(helmet());
 app.use(morgan("dev"));
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-//const authJWT = { secret: process.env.SECRET_KEY, algorithms: ["HS256"]}
+const authJWT = { secret: process.env.SECRET_KEY, algorithms: ["HS256"]}
 
 app.use("/api/v1",authRoutes);
-app.use("/api/v1",userRoutes);
-app.use("/api/v1",roleRoutes);
-// app.use("/api/v1", jwt(authJWT), userRoutes);
-// app.use("/api/v1", jwt(authJWT), roleRoutes);
+// app.use("/api/v1",userRoutes);
+// app.use("/api/v1",roleRoutes);
+app.use("/api/v1", jwt(authJWT), userRoutes);
+app.use("/api/v1", jwt(authJWT), roleRoutes);
 
 export default app;

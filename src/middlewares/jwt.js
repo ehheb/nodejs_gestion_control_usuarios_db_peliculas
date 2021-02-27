@@ -9,7 +9,7 @@ export const generateJWT = (user) => {
         lastName: user.lastName,
         email: user.email
         }
-        const token = jwt.sign(userToken, process.env.SECRET_KEY, {algorithm: "HS384", expiresIn: "1h"});
+        const token = jwt.sign(userToken, process.env.SECRET_KEY, {algorithm: "HS256", expiresIn: "1h"});
         return token;
     } catch(error) {
         throw new Error("Error al firmar el token");

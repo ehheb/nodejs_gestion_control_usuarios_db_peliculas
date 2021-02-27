@@ -48,9 +48,8 @@ export const updatePassword = async(req, res) => {
 
         //Valida que se encuentre el token dentro de la bd y valida si este token se encuentra en activo
         if(findToken && findToken.active == true) {
-            //Tiempo del token
+
             const expirationToken = findToken.expirationDate;
-            //Tiempo actual
             const date = new Date();
 
             //Valida si el token sigue vigente

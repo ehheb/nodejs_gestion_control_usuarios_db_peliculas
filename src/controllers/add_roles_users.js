@@ -1,5 +1,6 @@
 import {Users, Roles, UserRoles} from "../models";
 
+//Se crean los roles
 export const addRole = async(req, res) => {
     const name = req.body.name;
     const toLowerName = name.toLowerCase();
@@ -18,23 +19,25 @@ export const addRole = async(req, res) => {
     }
 }
 
+//Asigna los roles a los usuarios
 export const userRole = async(req, res) => {
     const userId = req.params.userId;
     const roleId = req.params.roleId;
     try {
         const verifyUser = await Users.findOne({ where: {id: userId}});
-
+        //Verifica que el usuario exista
         if(verifyUser){
             console.log(verifyUser);
             const verifyRole = await Roles.findOne({ where: {id: roleId}});
             
+            //Verifica que el rol exista
             if(verifyRole){
                 console.log(verifyRole);
                 const userEmail = verifyUser.email;
                 const userRole = verifyRole.name; 
 
                 const ifUserExist = await UserRoles.findOne({ where: {userId: userId}});
-
+                //Verifica si el usuario existe, si existe actualiza el rol
                 if(ifUserExist) {
                     console.log(ifUserExist);
                     const modifyRole = await UserRoles.update({roleId: roleId}, {where: {userId: userId}});
@@ -44,6 +47,8 @@ export const userRole = async(req, res) => {
                         userRole,
                         modifyRole
                     })
+
+                //Si no existe el usuario le asigna un rol    
                 } else {
                     const addRoleToUser = await UserRoles.create({
                         userId,
