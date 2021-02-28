@@ -1,10 +1,11 @@
 import joi from "joi";
+import spanishJoi from "../utils/spanish-joi-messages";
 
 export const signupSchema = joi.object({
-    firstName: joi.string().required(),
-    lastName: joi.string().required(),
-    email: joi.string().email().required(),
-    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')).required()
+    firstName: joi.string().required().messages(spanishJoi),
+    lastName: joi.string().required().messages(spanishJoi),
+    email: joi.string().email().required().messages(spanishJoi),
+    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')).required().messages(spanishJoi)
 });
 
 export const validateSignup = (schema) => {
@@ -23,7 +24,7 @@ export const validateSignup = (schema) => {
 }
 
 export const loginSchema = joi.object({
-    email: joi.string().email().required(),
+    email: joi.string().email().required().messages(spanishJoi),
     password: joi.string().required()
 });
 
@@ -43,7 +44,7 @@ export const validateLogin = (schema) => {
 }
 
 export const resetPassSchema = joi.object({
-    email: joi.string().email().required()
+    email: joi.string().email().required().messages(spanishJoi)
 });
 
 export const validateResetPass = (schema) => {
@@ -62,8 +63,8 @@ export const validateResetPass = (schema) => {
 }
 
 export const updatePassSchema = joi.object({
-    token: joi.string().uuid().required(),
-    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')).required()
+    token: joi.string().uuid().required().messages(spanishJoi),
+    password: joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,30}$')).required().messages(spanishJoi)
 });
 
 export const validateUpdatePass = (schema) => {
@@ -82,7 +83,7 @@ export const validateUpdatePass = (schema) => {
 }
 
 export const roleSchema = joi.object({
-    name : joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
+    name : joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required().messages(spanishJoi)
 });
 
 export const validateRole = (schema) => {
@@ -101,8 +102,8 @@ export const validateRole = (schema) => {
 }
 
 export const userRoleSchema = joi.object({
-    userId : joi.string().pattern(/^[0-9]+$/, 'numbers').required(),
-    roleId : joi.string().pattern(/^[0-9]+$/, 'numbers').required()
+    userId : joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    roleId : joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
 });
 
 export const validateUserRole = (schema) => {
@@ -121,7 +122,7 @@ export const validateUserRole = (schema) => {
 }
 
 export const findUsersSchema = joi.object({
-    id: joi.string().pattern(/^[0-9]+$/, 'numbers').required()
+    id: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
 });
 
 export const validateFindUser = (schema) => {
@@ -130,7 +131,7 @@ export const validateFindUser = (schema) => {
         try {
             const value = await schema.validateAsync(req.params);
             next();
-            
+
         } catch (error) {
             res.status(400).json({
                 message: error.message
