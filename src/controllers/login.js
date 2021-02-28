@@ -34,7 +34,7 @@ export const login = async(req, res) => {
         }
     } catch (error) {
         return res.status(500).json({
-            message: "Hubo un problema con la conexión en el servidor",
+            message: "Hubo un problema con al iniciar sesión",
             error
         })
         //console.log(error);

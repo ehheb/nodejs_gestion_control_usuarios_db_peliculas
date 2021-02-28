@@ -33,7 +33,7 @@ export const resetPassword = async(req, res) => {
 
     } catch(error) {
         res.status(500).json({
-            message: "Error al conectarse al servidor",
+            message: "Error al mandar el correo electrónico",
             error
         })
     }
@@ -43,8 +43,6 @@ export const updatePassword = async(req, res) => {
     const token = req.body.token;
     const userParamsId = req.params.userId;
     try {
-        //FALTA VALIDACION DE TOKEN a UIID
-        //FALTA VALIDACION DE LA CONTRASEÑA A >= 8 CARACTERES y con bcrypt
         const findToken = await ResetTokens.findOne({where : {token: token}});
         
         //Valida que se encuentre el token dentro de la bd y valida si este token se encuentra en activo
