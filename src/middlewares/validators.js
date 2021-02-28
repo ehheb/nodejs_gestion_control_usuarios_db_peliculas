@@ -9,15 +9,16 @@ export const signupSchema = joi.object({
 
 export const validateSignup = (schema) => {
     return async(req, res, next) => {
+
         try {
             const value = await schema.validateAsync(req.body);
             next();
+
         } catch (error) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: error.message
             });
         }
-
     }
 }
 
@@ -28,14 +29,15 @@ export const loginSchema = joi.object({
 
 export const validateLogin = (schema) => {
     return async(req, res, next) => {
+
         try {
             const value = await schema.validateAsync(req.body);
             next();
-        } catch (error) {
-            res.status(400).json({
-                message: error.message
-            })
 
+        } catch (error) {
+            return res.status(400).json({
+                message: error.message
+            });
         }
     }
 }
@@ -46,13 +48,15 @@ export const resetPassSchema = joi.object({
 
 export const validateResetPass = (schema) => {
     return async(req, res, next) => {
+
         try {
             const value = await schema.validateAsync(req.body);
             next();
+
         } catch (error) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: error.message
-            })
+            });
         }
     }
 }
@@ -64,13 +68,73 @@ export const updatePassSchema = joi.object({
 
 export const validateUpdatePass = (schema) => {
     return async(req, res, next) => {
+
         try {
             const value = await schema.validateAsync(req.body);
             next();
+
+        } catch(error) {
+            return res.status(400).json({
+                message: error.message
+            });
+        }
+    }
+}
+
+export const roleSchema = joi.object({
+    name : joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
+});
+
+export const validateRole = (schema) => {
+    return async(req, res, next) => {
+
+        try {
+            const value = await schema.validateAsync(req.body);
+            next();
+
+        } catch (error) {
+            return res.status(400).json({
+                message: error.message
+            })
+        }
+    }
+}
+
+export const userRoleSchema = joi.object({
+    userId : joi.string().pattern(/^[0-9]+$/, 'numbers').required(),
+    roleId : joi.string().pattern(/^[0-9]+$/, 'numbers').required()
+});
+
+export const validateUserRole = (schema) => {
+    return async(req, res, next) => {
+
+        try {
+            const value = await schema.validateAsync(req.params);
+            next();
+
         } catch(error) {
             res.status(400).json({
                 message: error.message
-            })
+            });
+        }
+    } 
+}
+
+export const findUsersSchema = joi.object({
+    id: joi.string().pattern(/^[0-9]+$/, 'numbers').required()
+});
+
+export const validateFindUser = (schema) => {
+    return async(req, res, next) => {
+
+        try {
+            const value = await schema.validateAsync(req.params);
+            next();
+            
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            });
         }
     }
 }

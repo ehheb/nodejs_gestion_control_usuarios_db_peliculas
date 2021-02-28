@@ -3,7 +3,7 @@ import {signup} from "../controllers/signup";
 import {login} from "../controllers/login";
 import {validateSignup, signupSchema, validateLogin, loginSchema } from "../middlewares/validators";
 import {validateResetPass, resetPassSchema, validateUpdatePass, updatePassSchema } from "../middlewares/validators";
-import {resetPassword, updatePassword} from "../controllers/reset_password"
+import {resetPassword, updatePassword} from "../controllers/reset_password";
 
 const router = express.Router();
 

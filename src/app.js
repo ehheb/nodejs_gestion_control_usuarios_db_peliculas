@@ -9,8 +9,8 @@ import jwt from "express-jwt";
 import swaggerUI from "swagger-ui-express";
 import swaggerDocument from "../swagger.json";
 import dotenv from "dotenv";
-dotenv.config();
 
+dotenv.config();
 
 const app = express();
 
@@ -23,8 +23,6 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 const authJWT = { secret: process.env.SECRET_KEY, algorithms: ["HS256"]}
 
 app.use("/api/v1",authRoutes);
-// app.use("/api/v1",userRoutes);
-// app.use("/api/v1",roleRoutes);
 app.use("/api/v1", jwt(authJWT), userRoutes);
 app.use("/api/v1", jwt(authJWT), roleRoutes);
 

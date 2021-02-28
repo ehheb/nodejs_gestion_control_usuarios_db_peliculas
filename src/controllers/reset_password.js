@@ -6,8 +6,10 @@ import bcrypt from "bcrypt";
 
 export const resetPassword = async(req, res) => {
     const email = req.body.email;
+
     try {
         const user = await Users.findOne({where: {email: email}});
+
         if(user) {
             const userId = user.id;
             const userEmail = user.email;
@@ -18,9 +20,8 @@ export const resetPassword = async(req, res) => {
                 expirationDate: moment().add(1, 'hour'),
                 active: true
             }
-
             const results = await ResetTokens.create(resetToken);
-            sendEmail(userEmail, tokenUUID, userId)
+            sendEmail(userEmail, tokenUUID, userId);
             return res.status(201).json({
                 message: "Se envió el token de reestablecimiento al correo electrónico proporcionado"
             });
@@ -28,20 +29,21 @@ export const resetPassword = async(req, res) => {
         } else {
             return res.status(400).json({
                 message: "Se envió el token de reestablecimiento al correo electrónico proporcionado guiño guiño"
-            })
+            });
         }
 
     } catch(error) {
         res.status(500).json({
             message: "Error al mandar el correo electrónico",
             error
-        })
+        });
     }
 };
 
 export const updatePassword = async(req, res) => {
     const token = req.body.token;
     const userParamsId = req.params.userId;
+
     try {
         const findToken = await ResetTokens.findOne({where : {token: token}});
         
@@ -52,6 +54,7 @@ export const updatePassword = async(req, res) => {
             const date = new Date();
 
             if(userId == userParamsId) {
+
                 //Valida si el token sigue vigente
                 if(moment(date).isBefore(expirationToken)){
                     //Se realiza el cambio de contraseña dentro de la base de datos
@@ -96,7 +99,11 @@ export const updatePassword = async(req, res) => {
                 message: "Token invalido o ya utilizado"
             });
         }
+
     } catch(error) {
-        console.log(error);
+        return res.status(500).json({
+            message: "Ocurrió un problema al mandar los datos",
+            error
+        });
     }
 }

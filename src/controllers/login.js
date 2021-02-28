@@ -4,6 +4,7 @@ import {generateJWT} from "../middlewares/jwt";
 import bcrypt from "bcrypt";
 
 export const login = async(req, res) => {
+    
     try {
         const email = req.body.email.toLowerCase();
         const password = req.body.password;
@@ -25,18 +26,19 @@ export const login = async(req, res) => {
             } else {
                 return res.status(401).json({
                     message: "Credenciales incorrectas"
-                })
+                });
             }
+
         } else {
             return res.status(401).json({
                 message: "Credenciales incorrectas"
-            })
+            });
         }
+
     } catch (error) {
         return res.status(500).json({
             message: "Hubo un problema con al iniciar sesión",
             error
-        })
-        //console.log(error);
+        });
     }
 } 
