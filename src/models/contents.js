@@ -4,18 +4,47 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Contents extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
+
+      //tiene muchos 
+      this.hasMany(models.EpisodeList, {
+        foreignKey: "contentId"
+      });
+
+      //muchos a muchos
+      this.belongsToMany(models.Actors, {
+        through: "ContentActors",
+        foreignKey: "contentId"
+      });
+
+      //muchos a muchos
+      this.belongsToMany(models.Directors, {
+        through: "ContentDirectors",
+        foreignKey: "contentId"
+      });
+
+      //muchos a muchos
+      this.belongsToMany(models.Genres, {
+        through: "ContentGenres",
+        foreignKey: "contentId"
+      });
+
+      //pertenece a
+      this.belongsTo(models.ContentRating, {
+        foreignKey: "contentRatingId"
+      });
+
+      //pertenece a
+      this.belongsTo(models.ContentTypes, {
+        foreignKey: "contentTypeId"
+      });
+
     }
   };
   Contents.init({
-    contentRating: DataTypes.INTEGER, //foreign key
-    contentType: DataTypes.INTEGER, //foreign key
+    contentRatingId: DataTypes.INTEGER, //foreign key
+    contentTypeId: DataTypes.INTEGER, //foreign key
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     totalSeasons: DataTypes.INTEGER,
@@ -24,7 +53,6 @@ module.exports = (sequelize, DataTypes) => {
     playTime: DataTypes.STRING,
     totalEpisodes: DataTypes.INTEGER,
     imdbLink: DataTypes.STRING,
-    lastUpdate: DataTypes.DATE,
     imdbScoreVotes: DataTypes.INTEGER,
     ratingDetails: DataTypes.JSON,
     languages: DataTypes.STRING

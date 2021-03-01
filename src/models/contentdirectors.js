@@ -10,7 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      
+      this.belongsTo(models.Directors, {
+        foreignKey: "directorId"
+      });
+
+      this.belongsTo(models.Contents, {
+        foreignKey: "contentId"
+      });
+      
     }
   };
   ContentDirectors.init({

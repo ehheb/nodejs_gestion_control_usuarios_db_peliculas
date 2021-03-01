@@ -2,17 +2,23 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('ContentDirectors', {
-      id: {
+      directorsId: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      directorId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Directors",
+          key: "id"
+        }
       },
       contentId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Contents",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,

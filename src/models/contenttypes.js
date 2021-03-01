@@ -4,13 +4,16 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ContentTypes extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
+      
+      this.hasMany(models.Contents, {
+        foreignKey: "contentTypeId"
+      });
+
+      this.hasMany(models.ContentRating, {
+        foreignKey: "contentTypeId"
+      })
     }
   };
   ContentTypes.init({

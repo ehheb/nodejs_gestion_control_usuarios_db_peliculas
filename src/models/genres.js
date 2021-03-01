@@ -3,21 +3,21 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Actors extends Model {
+  class Genres extends Model {
 
     static associate(models) {
       
       this.belongsToMany(models.Contents, {
-        through: "ContentActors",
-        foreignKey: "actorId"
-      });
+        through: "ContentGenres",
+        foreignKey: "genreId"
+      })
     }
   };
-  Actors.init({
+  Genres.init({
     name: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Actors',
+    modelName: 'Genres',
   });
-  return Actors;
+  return Genres;
 };

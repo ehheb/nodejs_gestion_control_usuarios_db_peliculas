@@ -8,8 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      contentId: {
-        type: Sequelize.INTEGER
+      contentId: { //foreignKey
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Contents",
+          key: "id"
+        }
       },
       seasonNum: {
         type: Sequelize.INTEGER

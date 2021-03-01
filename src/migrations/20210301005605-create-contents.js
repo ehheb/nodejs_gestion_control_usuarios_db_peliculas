@@ -8,6 +8,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      contentRatingId: { //foreign key
+        type: Sequelize.INTEGER,
+        references: {
+          model: "ContentRating",
+          key: "id"
+        }
+      },
+      contentTypeId: { //foreign key
+        type: Sequelize.INTEGER,
+        references: {
+          model: "ContentTypes",
+          key: "id"
+        }
+      },
       title: {
         type: Sequelize.STRING
       },
@@ -26,20 +40,11 @@ module.exports = {
       playTime: {
         type: Sequelize.STRING
       },
-      contentRating: {
-        type: Sequelize.INTEGER
-      },
       totalEpisodes: {
-        type: Sequelize.INTEGER
-      },
-      contentType: {
         type: Sequelize.INTEGER
       },
       imdbLink: {
         type: Sequelize.STRING
-      },
-      lastUpdate: {
-        type: Sequelize.DATE
       },
       imdbScoreVotes: {
         type: Sequelize.INTEGER
