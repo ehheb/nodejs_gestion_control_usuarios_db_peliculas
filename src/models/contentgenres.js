@@ -4,21 +4,26 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ContentGenres extends Model {
-
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
     static associate(models) {
       
       this.belongsTo(models.Genres, {
-        foreignKey: "genreId"
+        foreignKey: 'genreId'
       });
 
       this.belongsTo(models.Contents, {
-        foreignKey: "contentId"
+        foreignKey: 'contentId'
       });
+
     }
   };
   ContentGenres.init({
-    genreId: DataTypes.INTEGER, //foreign key
-    contentId: DataTypes.INTEGER //foreign key
+    genreId: DataTypes.INTEGER,
+    contentId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'ContentGenres',

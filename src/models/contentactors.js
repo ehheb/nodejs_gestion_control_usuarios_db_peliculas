@@ -8,18 +8,18 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       
       this.belongsTo(models.Actors, {
-        foreignKey: "actorId"
+        foreignKey: 'actorId'
       });
 
       this.belongsTo(models.Contents, {
-        foreignKey: "contentId"
+        foreignKey: 'contentId'
       });
 
     }
   };
   ContentActors.init({
-    actorId: DataTypes.INTEGER, //foreign key
-    contentId: DataTypes.INTEGER //foreing key
+    actorId: DataTypes.INTEGER,
+    contentId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'ContentActors',

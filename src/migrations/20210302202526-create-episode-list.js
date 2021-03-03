@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      contentId: { //foreignKey
+      contentId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Contents",
-          key: "id"
+          model: 'Contents',
+          key: 'id'
         }
       },
       seasonNum: {
@@ -30,7 +30,7 @@ module.exports = {
       episodeNum: {
         type: Sequelize.INTEGER
       },
-      description: {
+      descritpion: {
         type: Sequelize.TEXT
       },
       episodeImdbLink: {

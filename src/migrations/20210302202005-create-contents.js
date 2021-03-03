@@ -8,25 +8,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      contentRatingId: { //foreign key
+      contentRatingId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "ContentRating",
-          key: "id"
+          model: 'ContentRatings',
+          key: 'id'
         }
       },
-      contentTypeId: { //foreign key
+      contentTypeId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "ContentTypes",
-          key: "id"
+          model: 'ContentTypes',
+          key: 'id'
         }
       },
       title: {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       totalSeasons: {
         type: Sequelize.INTEGER
@@ -52,8 +52,8 @@ module.exports = {
       ratingDetails: {
         type: Sequelize.JSON
       },
-      languages: {
-        type: Sequelize.STRING
+      languajes: {
+        type: Sequelize.JSON
       },
       createdAt: {
         allowNull: false,

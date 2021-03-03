@@ -1,24 +1,25 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('ContentDirectors', {
-      directorsId: {
+    await queryInterface.createTable('ContentRatings', {
+      id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      contentTypeId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Directors",
-          key: "id"
+          model: 'ContentTypes',
+          key: 'id'
         }
       },
-      contentId: {
-        allowNull: false,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Contents",
-          key: "id"
-        }
+      name: {
+        type: Sequelize.STRING
+      },
+      description: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -27,10 +28,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      }        
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('ContentDirectors');
+    await queryInterface.dropTable('ContentRatings');
   }
 };

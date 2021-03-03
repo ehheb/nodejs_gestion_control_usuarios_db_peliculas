@@ -10,20 +10,20 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      
+
       this.belongsTo(models.Directors, {
-        foreignKey: "directorId"
+        foreignKey: 'directorId'
+      });
+      
+      this.belongsTo(models.Contents, {
+        foreignKey: 'contentId'
       });
 
-      this.belongsTo(models.Contents, {
-        foreignKey: "contentId"
-      });
-      
     }
   };
   ContentDirectors.init({
-    directorId: DataTypes.INTEGER, //foreign key
-    contentId: DataTypes.INTEGER //foreign key
+    directorId: DataTypes.INTEGER,
+    contentId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'ContentDirectors',
