@@ -1,6 +1,7 @@
 import authRoutes from "./routes/auth";
 import userRoutes from "./routes/users";
 import roleRoutes from "./routes/roles";
+import actorsRoutes from "./routes/actors";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -22,8 +23,11 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 const authJWT = { secret: process.env.SECRET_KEY, algorithms: ["HS256"]}
 
+app.use("/api/v1", actorsRoutes);
+
 app.use("/api/v1",authRoutes);
 app.use("/api/v1", jwt(authJWT), userRoutes);
 app.use("/api/v1", jwt(authJWT), roleRoutes);
+
 
 export default app;
