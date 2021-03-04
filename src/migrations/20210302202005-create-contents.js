@@ -8,20 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      contentRatingId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'ContentRatings',
-          key: 'id'
-        }
-      },
-      contentTypeId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'ContentTypes',
-          key: 'id'
-        }
-      },
       title: {
         type: Sequelize.STRING
       },
@@ -40,8 +26,22 @@ module.exports = {
       playTime: {
         type: Sequelize.STRING
       },
+      contentRatingId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'ContentRatings',
+          key: 'id'
+        }
+      },
       totalEpisodes: {
         type: Sequelize.INTEGER
+      },
+      contentTypeId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'ContentTypes',
+          key: 'id'
+        }
       },
       imdbLink: {
         type: Sequelize.STRING
@@ -52,8 +52,8 @@ module.exports = {
       ratingDetails: {
         type: Sequelize.JSON
       },
-      languajes: {
-        type: Sequelize.JSON
+      languages: {
+        type: Sequelize.ARRAY(Sequelize.TEXT)
       },
       createdAt: {
         allowNull: false,

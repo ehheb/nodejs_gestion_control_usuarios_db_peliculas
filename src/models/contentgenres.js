@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   ContentGenres.init({
     genreId: DataTypes.INTEGER,
-    contentId: DataTypes.INTEGER
+/*     contentId: DataTypes.INTEGER */
   }, {
     sequelize,
     modelName: 'ContentGenres',

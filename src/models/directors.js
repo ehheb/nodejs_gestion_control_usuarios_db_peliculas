@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsToMany(models.Contents, {
         through: 'ContentDirectors',
-        foreignKey: 'contentId'
+        foreignKey: 'directorId'
       });
     }
   };

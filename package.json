@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "dev": "nodemon --exec babel-node ./src/server.js",
-    "test": "jest",
     "build": "babel ./src --out-dir dist --copy-files",
+    "test": "jest",
     "clean": "rm -rf dist"
   },
   "keywords": [],

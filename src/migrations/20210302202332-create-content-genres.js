@@ -4,8 +4,8 @@ module.exports = {
     await queryInterface.createTable('ContentGenres', {
 
       genreId: {
-        allowNull: false,
-        primaryKey: true,
+/*         allowNull: false,
+        primaryKey: true, */
         type: Sequelize.INTEGER,
         references: {
           model: 'Genres',
@@ -13,8 +13,8 @@ module.exports = {
         }
       },
       contentId: {
-        allowNull: false,
-        primaryKey: true,
+/*         allowNull: false,
+        primaryKey: true, */
         type: Sequelize.INTEGER,
         references: {
           model: 'Contents',

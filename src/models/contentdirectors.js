@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   ContentDirectors.init({
     directorId: DataTypes.INTEGER,
-    contentId: DataTypes.INTEGER
+  /*   contentId: DataTypes.INTEGER */
   }, {
     sequelize,
     modelName: 'ContentDirectors',

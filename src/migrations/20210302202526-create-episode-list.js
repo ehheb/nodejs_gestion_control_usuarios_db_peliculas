@@ -8,18 +8,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      seasonNum: {
+        type: Sequelize.INTEGER
+      },
+      episodeName: {
+        type: Sequelize.STRING
+      },
       contentId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Contents',
           key: 'id'
         }
-      },
-      seasonNum: {
-        type: Sequelize.INTEGER
-      },
-      episodeName: {
-        type: Sequelize.STRING
       },
       releaseDate: {
         type: Sequelize.STRING
@@ -30,7 +30,7 @@ module.exports = {
       episodeNum: {
         type: Sequelize.INTEGER
       },
-      descritpion: {
+      description: {
         type: Sequelize.TEXT
       },
       episodeImdbLink: {

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   EpisodeList.init({
-    contentId: DataTypes.INTEGER,
+  /*   contentId: DataTypes.INTEGER, */
     seasonNum: DataTypes.INTEGER,
     episodeName: DataTypes.STRING,
     releaseDate: DataTypes.STRING,

@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsToMany(models.Contents, {
         through: 'ContentGenres',
-        foreignKey: 'contentId'
+        foreignKey: 'genreId'
       });
     }
   };

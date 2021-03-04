@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   ContentRatings.init({
-    contentTypeId: DataTypes.INTEGER,
+  /*   contentTypeId: DataTypes.INTEGER, */
     name: DataTypes.STRING,
     description: DataTypes.TEXT
   }, {

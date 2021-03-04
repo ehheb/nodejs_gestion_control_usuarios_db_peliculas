@@ -9,17 +9,17 @@ module.exports = (sequelize, DataTypes) => {
 
       this.belongsToMany(models.Actors, {
         through: 'ContentActors',
-        foreignKey: 'actorId'
+        foreignKey: 'contentId'
       });
 
       this.belongsToMany(models.Directors, {
         through: 'ContentDirectors',
-        foreignKey: 'directorId'
+        foreignKey: 'contentId'
       });
 
       this.belongsToMany(models.Genres, {
         through: 'ContentGenres',
-        foreignKey: 'genreId'
+        foreignKey: 'contentId'
       });
 
       this.belongsTo(models.ContentRatings, {
@@ -38,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Contents.init({
-    contentRatingId: DataTypes.INTEGER,
-    contentTypeId: DataTypes.INTEGER,
+/*     contentRatingId: DataTypes.INTEGER,
+    contentTypeId: DataTypes.INTEGER, */
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
     totalSeasons: DataTypes.INTEGER,
