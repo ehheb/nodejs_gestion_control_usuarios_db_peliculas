@@ -1,6 +1,44 @@
 import joi from "joi";
 import spanishJoi from "../utils/spanish-joi-messages";
 
+//findUserSchema
+//validateFindUser
+export const findInUrl = joi.object({
+    id: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
+});
+
+export const validateFindInUrl = (schema) => {
+    return async(req, res, next) => {
+
+        try {
+            const value = await schema.validateAsync(req.params);
+            next();
+
+        } catch (error) {
+            res.status(400).json({
+                message: error.message
+            });
+        }
+    }
+}
+
+export const createActorSchema = joi.object({
+    name: joi.string().required().messages(spanishJoi)
+});
+
+export const validateActors = (schema) => {
+    return async(req, res, next) => {
+        try {
+            const value = await schema.validateAsync(req.body);
+            next();
+        } catch(error) {
+            return res.status(400).json({
+                message: error.message
+            })
+        }
+    }
+}
+
 export const signupSchema = joi.object({
     firstName: joi.string().required().messages(spanishJoi),
     lastName: joi.string().required().messages(spanishJoi),
@@ -119,23 +157,4 @@ export const validateUserRole = (schema) => {
             });
         }
     } 
-}
-
-export const findUsersSchema = joi.object({
-    id: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
-});
-
-export const validateFindUser = (schema) => {
-    return async(req, res, next) => {
-
-        try {
-            const value = await schema.validateAsync(req.params);
-            next();
-
-        } catch (error) {
-            res.status(400).json({
-                message: error.message
-            });
-        }
-    }
 }
