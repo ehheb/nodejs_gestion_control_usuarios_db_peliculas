@@ -81,7 +81,6 @@ export const updateActor = async(req, res) => {
         let findActor = await Actors.findOne({where: {id: id}});
 
         if(findActor) {
-            // if(renameActor) {
                 await Actors.update({name: renameActor}, { where: {id: id}});
                 console.log(findActor.id);
 
@@ -90,12 +89,6 @@ export const updateActor = async(req, res) => {
                     de: findActor.name,
                     por: renameActor
                 });
-
-            // } else {
-            //     return res.status(401).json({
-            //         message: "Debe de colocar dentro del cuerpo el nuevo nombre del actor"
-            //     });
-            // }
 
         } else {
             return res.status(401).json({
@@ -120,18 +113,18 @@ export const deleteActor = async(req, res) => {
         if(knowActor) {
             await Actors.destroy({where: {id: id}});
             let actor = knowActor.name
-            res.status(201).json({
+            return res.status(201).json({
                 Elimino: actor,
             });
 
         } else {
-            res.status(400).json({
+            return res.status(400).json({
                 message: "No existe el id del actor"
             })
         }
 
     } catch(error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error al eliminar al actor"
         });
     }

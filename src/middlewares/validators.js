@@ -3,6 +3,8 @@ import spanishJoi from "../utils/spanish-joi-messages";
 
 //findUserSchema
 //validateFindUser
+
+//Valida que dentro de la url se coloque un valor de tipo int y que no se encuentre vacío
 export const findInUrl = joi.object({
     id: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
 });

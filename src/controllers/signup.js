@@ -16,27 +16,26 @@ export const signup = async (req, res) => {
             const role = 'usuario';
             req.body.password = encryptedPass;
             
-            
-            //Se busca un registro que se llame usuario
+            //Se busca un registro que se llame usuario dentro de la tabla de roles
             const searchRole = await Roles.findOne({where: {name: role}});
             
             if(searchRole) {
                 const results = await Users.create(req.body);
                 const id = results.id;
                 const defaultRole = searchRole.id;
-                console.log(defaultRole);
-    
+
+                //La persona que crea una nueva cuenta se le coloca por default el rol de "usuario" 
                 const userRole = await UserRoles.create({userId: id, roleId: defaultRole});
             
                 return res.status(201).json({
-                    message: "Se ha creado el usuario",
+                    message: "Se ha creado el nuevo registro con el rol de usuario",
                     results,
                     userRole
                 });
             
             } else {
                 return res.status(500).json({
-                    message: "No se pudo encontrar el rol usuario"
+                    message: "Dentro de la tabla Roles no se pudo encontrar el rol llamado usuario"
                 });
             }
 
