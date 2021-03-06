@@ -1,6 +1,6 @@
 import express from "express";
-import {getAllActors, getActorById, postActor, updateActor, deleteActor} from "../controllers/imdb/actors";
-import {validateActors, createActorSchema, validateFindInUrl, findInUrl} from "../middlewares/validators";
+import {getAllActors, getActorById, postActor, updateActor, deleteActor} from "../../controllers/imdb/actors";
+import {validateActors, createActorSchema, validateFindInUrl, findInUrl} from "../../middlewares/validators";
 
 const router = express.Router();
 

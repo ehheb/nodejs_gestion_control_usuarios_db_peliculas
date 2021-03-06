@@ -10,7 +10,7 @@ export const getAllActors = async(req, res) => {
             });
 
         } else {
-            return res,status(401).json({
+            return res.status(401).json({
                 message: "No se encontró la tabla de actores"
             });
         }
