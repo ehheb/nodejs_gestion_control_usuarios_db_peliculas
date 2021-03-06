@@ -1,29 +1,92 @@
-import {Users, Roles} from "../models/";
+import {Users} from "../models/";
+import jwt from "jsonwebtoken";
 
-export const getRole = async(req, res) => {
+export const getRole = async (req, res, next) => {
     try {
-        let id = req.body.id;
-        const role = await Users.findOne({where: {id: id}, include:[Roles]});
-        return res.status(200).json({
-        message: "Datos:",
-        role
-    });
+        const token = req.headers.authorization.split(' ')[1];
+        
+        if(token) {
+        const userToken = jwt.verify(token, process.env.SECRET_KEY);
+            
+            if(userToken) {
+                req.id = userToken.id;
+                next();
+
+            } else {
+                return res.status(400).json({
+                    message: "Credenciales incorrectas"
+                });
+            }
+
+        } else {
+            return res.status(400).json({
+                message: "Token no encontrado"
+            });
+        }
+    
     } catch(error) {
         return res.status(500).json({
+            message: "Error al encontrar token"
+        })
+    }
+}
+
+export const isAdmin = async(req, res, next) => {
+    try {
+        const user = await Users.findOne({where: {id: req.id}, include:["Roles"]});
+        const userRole = user.Roles[0].name;
+        console.log(userRole);
+        if(userRole === "administrador") {
+            next();
+        } else {
+            res.status(400).json({
+                message: "No tienes permiso para acceder a esta ruta"
+            });
+        }
+    } catch(error) {
+        res.status(500).json({
+            message: "Error al obtener el recurso",
             error
         })
     }
 }
 
-// export const isAdmin = (role) => {
-//     let role = getRole(30)
-//     return (req, res, next) => {
-//         if(role === "admin") {
-//             next();
-//         } else {
-//             res.json({
-//                 message: "Sin permisos"
-//             })
-//         }
-//     }
-// }
+export const isEditor = async(req, res, next) => {
+    try {
+        const user = await Users.findOne({where: {id: req.id}, include:["Roles"]});
+        const userRole = user.Roles[0].name;
+        console.log(userRole);
+        if(userRole === "editor") {
+            next();
+        } else {
+            res.status(400).json({
+                message: "No tienes permiso para acceder a esta ruta"
+            });
+        }
+    } catch(error) {
+        res.status(500).json({
+            message: "Error al obtener el recurso",
+            error
+        })
+    }
+}
+
+export const isUser = async(req, res, next) => {
+    try {
+        const user = await Users.findOne({where: {id: req.id}, include:["Roles"]});
+        const userRole = user.Roles[0].name;
+        console.log(userRole);
+        if(userRole === "usuario") {
+            next();
+        } else {
+            res.status(400).json({
+                message: "No tienes permiso para acceder a esta ruta"
+            });
+        }
+    } catch(error) {
+        res.status(500).json({
+            message: "Error al obtener el recurso",
+            error
+        })
+    }
+}

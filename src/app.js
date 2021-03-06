@@ -23,6 +23,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 const authJWT = { secret: process.env.SECRET_KEY, algorithms: ["HS256"]}
 
+//Esta ruta se tiene proteger, pero para realiar que el código esté funcionando eso se deja para despúes
 app.use("/api/v1", actorsRoutes);
 
 app.use("/api/v1",authRoutes);

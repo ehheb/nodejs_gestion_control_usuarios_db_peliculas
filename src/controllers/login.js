@@ -1,6 +1,7 @@
 
 import {Users} from "../models/";
 import {generateJWT} from "../middlewares/jwt";
+import {getRole} from "../middlewares/roleAuth";
 import bcrypt from "bcrypt";
 
 export const login = async(req, res) => {
@@ -9,19 +10,19 @@ export const login = async(req, res) => {
         const email = req.body.email.toLowerCase();
         const password = req.body.password;
 
-        const results = await Users.findOne({where: {email: email}});
+        const results = await Users.findOne({where: {email: email}, include:["Roles"]});
         
         if(results) {
             const comparePass = bcrypt.compareSync(password, results.password);
             const token = generateJWT(results);
-            console.log(comparePass);
             
-            if(comparePass) {
+            if(comparePass) {                
                 return res.status(200).json({
                     message: "Credenciales correctas",
                     results,
                     token
                 });
+                
 
             } else {
                 return res.status(401).json({
@@ -41,4 +42,4 @@ export const login = async(req, res) => {
             error
         });
     }
-} 
+}
