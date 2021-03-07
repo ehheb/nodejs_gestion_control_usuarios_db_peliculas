@@ -1,6 +1,7 @@
 import {Users} from "../models/";
 import jwt from "jsonwebtoken";
 
+//Middleware para obtenr el JWT y poder así obtener al usuario que inició sesión
 export const getRole = async (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
@@ -31,6 +32,7 @@ export const getRole = async (req, res, next) => {
     }
 }
 
+//Middleware para el rol administrador del usuario que inició sesión
 export const isAdmin = async(req, res, next) => {
     try {
         const user = await Users.findOne({where: {id: req.id}, include:["Roles"]});
@@ -51,6 +53,7 @@ export const isAdmin = async(req, res, next) => {
     }
 }
 
+//Middleware para el rol editor del usuario que inició sesión
 export const isEditor = async(req, res, next) => {
     try {
         const user = await Users.findOne({where: {id: req.id}, include:["Roles"]});
@@ -71,6 +74,7 @@ export const isEditor = async(req, res, next) => {
     }
 }
 
+//Middleware para el rol usuario del usuario que inició sesión
 export const isUser = async(req, res, next) => {
     try {
         const user = await Users.findOne({where: {id: req.id}, include:["Roles"]});

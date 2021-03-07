@@ -1,10 +1,7 @@
 import joi from "joi";
 import spanishJoi from "../utils/spanish-joi-messages";
 
-//findUserSchema
-//validateFindUser
-
-//Valida que dentro de la url se coloque un valor de tipo int y que no se encuentre vacío
+//Validaciones genéricas de la url
 export const findInUrl = joi.object({
     id: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
 });
@@ -24,11 +21,12 @@ export const validateFindInUrl = (schema) => {
     }
 }
 
-export const createActorSchema = joi.object({
+//Validaciones genéricas para obtener el nombre de los actores, directores, generos, tipos, idiomas, etc
+export const createNameSchema = joi.object({
     name: joi.string().required().messages(spanishJoi)
 });
 
-export const validateActors = (schema) => {
+export const validateName = (schema) => {
     return async(req, res, next) => {
         try {
             const value = await schema.validateAsync(req.body);
@@ -41,6 +39,7 @@ export const validateActors = (schema) => {
     }
 }
 
+//Validaciones específicas para las funciones de los usuarios
 export const signupSchema = joi.object({
     firstName: joi.string().required().messages(spanishJoi),
     lastName: joi.string().required().messages(spanishJoi),

@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 
+//Método para generar el token
 export const generateJWT = (req) => {
     
     try {

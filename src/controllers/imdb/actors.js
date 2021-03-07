@@ -1,5 +1,7 @@
 import {Actors} from "../../models";
 
+
+//Función para obtener a todos los actores
 export const getAllActors = async(req, res) => {
     try {
         let results = await Actors.findAll();
@@ -22,6 +24,7 @@ export const getAllActors = async(req, res) => {
     }
 }
 
+//Función para obtener a un actor por su id, este se debe de colocar en la URL
 export const getActorById = async(req, res) => {
     let id = req.params.id;
 
@@ -47,6 +50,7 @@ export const getActorById = async(req, res) => {
     }
 }
 
+//Función para añadir a un nuevo actor a la base de datos
 export const postActor = async(req, res) => {
 
     try {
@@ -73,6 +77,7 @@ export const postActor = async(req, res) => {
     }
 }
 
+//Función para actualizar los datos de algun actor por medio de su id
 export const updateActor = async(req, res) => {
     let id = req.params.id;
     let renameActor = req.body.name;
@@ -104,6 +109,7 @@ export const updateActor = async(req, res) => {
     }
 }
 
+//Función para eliminar a un actor por medio de su id
 export const deleteActor = async(req, res) => {
     let id = req.params.id;
 

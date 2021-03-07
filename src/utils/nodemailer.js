@@ -3,6 +3,7 @@ const {google} = require('googleapis');
 const dotenv = require('dotenv');
 dotenv.config();
 
+//Métodos y configuraciones para enviar un correo electrónico
 const oAuth2 = google.auth.OAuth2;
 
 const clientId = process.env.CLIENT_ID;

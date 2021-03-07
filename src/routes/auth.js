@@ -6,7 +6,7 @@ import {validateResetPass, resetPassSchema, validateUpdatePass, updatePassSchema
 import {resetPassword, updatePassword} from "../controllers/reset_password";
 
 const router = express.Router();
-
+//Rutas de para crear cuenta, inicar sesión y restablecer la contraseña
 router.post("/signup", validateSignup(signupSchema), signup);
 router.post("/login", validateLogin(loginSchema), login);
 router.post("/reset-password", validateResetPass(resetPassSchema), resetPassword);

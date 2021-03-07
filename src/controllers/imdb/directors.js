@@ -1,5 +1,6 @@
 import {Directors} from "../../models";
 
+//Función para obtener a todos los directores
 export const getAllDirectors = async(req, res) => {
     try {
         let results = await Directors.findAll();
@@ -22,6 +23,7 @@ export const getAllDirectors = async(req, res) => {
     }
 }
 
+//Función para obtener a un director por medio de su id colocándolo en la URL
 export const getDirectorById = async(req, res) => {
     let id = req.params.id;
 
@@ -47,6 +49,7 @@ export const getDirectorById = async(req, res) => {
     }
 }
 
+//Función para crear a un nuevo director en la base de datos
 export const postDirector = async(req, res) => {
 
     try {
@@ -73,6 +76,7 @@ export const postDirector = async(req, res) => {
     }
 }
 
+//Función para actualizar los datos de un director por medio de su id, colocándolo en la URL
 export const updateDirector = async(req, res) => {
     let id = req.params.id;
     let renameDirector = req.body.name;
@@ -104,6 +108,7 @@ export const updateDirector = async(req, res) => {
     }
 }
 
+//Función para eliminar a un director por medio del id colocándolo en la URL
 export const deleteDirector = async(req, res) => {
     let id = req.params.id;
 

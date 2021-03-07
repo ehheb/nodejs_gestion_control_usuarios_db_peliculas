@@ -1,3 +1,4 @@
+//Mensajes en español para las validaciones con joi
 export default {
     "any.unknown": "no esta permitido",
     "any.invalid": "contiene un valor invalido",

@@ -1,5 +1,6 @@
 import {Users} from "../models/";
 
+//Función para obtener a todos los usuarios
 export const findAllUsers = async (req, res) => {
     
     try{
@@ -15,6 +16,7 @@ export const findAllUsers = async (req, res) => {
     }
 };
 
+//Función para encontrar un usuario por medio del id que debe de estar en la URL
 export const findOneUser = async(req, res) => {
     let  id = req.params.id;
 

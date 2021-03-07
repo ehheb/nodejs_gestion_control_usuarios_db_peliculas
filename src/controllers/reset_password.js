@@ -4,6 +4,7 @@ import {v4 as uuid} from "uuid";
 import moment from "moment";
 import bcrypt from "bcrypt";
 
+//Función para envíar el token al correo electrónico
 export const resetPassword = async(req, res) => {
     const email = req.body.email;
 
@@ -21,6 +22,7 @@ export const resetPassword = async(req, res) => {
                 active: true
             }
             const results = await ResetTokens.create(resetToken);
+            //Se manda a llamar a la función sendEmail que es la que permite enviar el email
             sendEmail(userEmail, tokenUUID, userId);
             return res.status(201).json({
                 message: "Se envió el token de reestablecimiento al correo electrónico proporcionado"
@@ -40,6 +42,7 @@ export const resetPassword = async(req, res) => {
     }
 };
 
+//Función para actualizar la contraseña por medio del token
 export const updatePassword = async(req, res) => {
     const token = req.body.token;
     const userParamsId = req.params.userId;

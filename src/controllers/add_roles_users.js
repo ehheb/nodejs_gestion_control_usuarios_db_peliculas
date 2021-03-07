@@ -1,6 +1,6 @@
 import {Users, Roles, UserRoles} from "../models";
 
-//Se crean los roles
+//Función para crear los roles
 export const addRole = async(req, res) => {
     const name = req.body.name;
     const toLowerName = name.toLowerCase();
@@ -21,7 +21,7 @@ export const addRole = async(req, res) => {
     }
 }
 
-//Asigna los roles a los usuarios
+//Función para asignar roles a los usuarios
 export const userRole = async(req, res) => {
     const userId = req.params.userId;
     const roleId = req.params.roleId;
