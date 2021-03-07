@@ -16,7 +16,7 @@ export const findAllUsers = async (req, res) => {
     }
 };
 
-//Función para encontrar un usuario por medio del id que debe de estar en la URL
+//Función para encontrar a un usuario por medio del id que debe de estar en la URL
 export const findOneUser = async(req, res) => {
     let  id = req.params.id;
 

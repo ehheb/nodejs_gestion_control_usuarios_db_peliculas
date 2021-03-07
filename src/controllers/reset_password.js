@@ -42,7 +42,7 @@ export const resetPassword = async(req, res) => {
     }
 };
 
-//Función para actualizar la contraseña por medio del token
+//Función para actualizar la contraseña por medio del token enviado al correo electrónico
 export const updatePassword = async(req, res) => {
     const token = req.body.token;
     const userParamsId = req.params.userId;

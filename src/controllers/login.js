@@ -1,7 +1,5 @@
-
 import {Users} from "../models/";
 import {generateJWT} from "../middlewares/jwt";
-import {getRole} from "../middlewares/roleAuth";
 import bcrypt from "bcrypt";
 
 //Función para iniciar sesión
@@ -12,11 +10,11 @@ export const login = async(req, res) => {
         const password = req.body.password;
 
         const results = await Users.findOne({where: {email: email}, include:["Roles"]});
-        //Si existe un email en la base de datos entonces ejecuta el siguiente código
+        //Si existe un email procede a validar la contraseña
         if(results) {
             const comparePass = bcrypt.compareSync(password, results.password);
             const token = generateJWT(results);
-            //Si la contraseña es válida corre el siguiente código
+            //Si la contraseña es válida, iniciará sesión
             if(comparePass) {                
                 return res.status(200).json({
                     message: "Credenciales correctas",
@@ -24,7 +22,6 @@ export const login = async(req, res) => {
                     token
                 });
                 
-
             } else {
                 return res.status(401).json({
                     message: "Credenciales incorrectas"

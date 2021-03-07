@@ -1,6 +1,5 @@
 import {Actors} from "../../models";
 
-
 //Función para obtener a todos los actores
 export const getAllActors = async(req, res) => {
     try {

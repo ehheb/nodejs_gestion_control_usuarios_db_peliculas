@@ -50,7 +50,7 @@ export const userRole = async(req, res) => {
                         modifyRole
                     });
 
-                //Si no existe el usuario le asigna un rol    
+                //Si no existe el usuario se le asigna un rol    
                 } else {
                     const addRoleToUser = await UserRoles.create({
                         userId,
