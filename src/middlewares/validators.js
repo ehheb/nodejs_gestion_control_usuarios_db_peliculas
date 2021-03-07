@@ -3,7 +3,7 @@ import spanishJoi from "../utils/spanish-joi-messages";
 
 //Validaciones genéricas de la url
 export const findInUrl = joi.object({
-    id: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
+        id: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
 });
 
 export const validateFindInUrl = (schema) => {

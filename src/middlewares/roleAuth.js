@@ -40,6 +40,7 @@ export const isAdmin = async(req, res, next) => {
         console.log(userRole);
         if(userRole === "administrador") {
             next();
+            
         } else {
             res.status(400).json({
                 message: "No tienes permiso para acceder a esta ruta"
@@ -59,7 +60,7 @@ export const isEditor = async(req, res, next) => {
         const user = await Users.findOne({where: {id: req.id}, include:["Roles"]});
         const userRole = user.Roles[0].name;
         console.log(userRole);
-        if(userRole === "editor") {
+        if(userRole === "editor" || userRole === "administrador") {
             next();
         } else {
             res.status(400).json({
@@ -80,7 +81,7 @@ export const isUser = async(req, res, next) => {
         const user = await Users.findOne({where: {id: req.id}, include:["Roles"]});
         const userRole = user.Roles[0].name;
         console.log(userRole);
-        if(userRole === "usuario") {
+        if(userRole === "usuario" || userRole === "editor" || userRole === "administrador") {
             next();
         } else {
             res.status(400).json({

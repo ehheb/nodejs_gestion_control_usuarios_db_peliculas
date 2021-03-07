@@ -4,7 +4,7 @@ import {validateName, createNameSchema, validateFindInUrl, findInUrl} from "../.
 
 const router = express.Router();
 //Rutas de los actores 
-router.get("/actors",getAllActors);
+router.get("/actors", getAllActors);
 router.get("/actors/:id", validateFindInUrl(findInUrl), getActorById);
 router.post("/actors", validateName(createNameSchema), postActor);
 router.put("/actors/:id", validateFindInUrl(findInUrl), validateName(createNameSchema), updateActor);
