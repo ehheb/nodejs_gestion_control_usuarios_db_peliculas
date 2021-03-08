@@ -119,6 +119,7 @@ export const deleteContentType = async(req, res) => {
             await ContentTypes.destroy({where: {id: id}});
             let contentType = knowContentType.name
             return res.status(201).json({
+                message: "Se ha eliminado el tipo de contenido de manera correcta",
                 Deleted: contentType
             });
 

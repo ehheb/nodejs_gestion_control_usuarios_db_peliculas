@@ -119,6 +119,7 @@ export const deleteDirector = async(req, res) => {
             await Directors.destroy({where: {id: id}});
             let director = knowDirector.name
             return res.status(201).json({
+                message: "Se ha eliminado el director de manera correcta",
                 Deleted: director
             });
 

@@ -119,6 +119,7 @@ export const deleteGenre = async(req, res) => {
             await Genres.destroy({where: {id: id}});
             let genre = knowGenre.name
             return res.status(201).json({
+                message: "Se ha eliminado el género de manera correcta",
                 Deleted: genre
             });
 

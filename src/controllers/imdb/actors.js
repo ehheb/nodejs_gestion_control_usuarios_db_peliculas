@@ -119,7 +119,8 @@ export const deleteActor = async(req, res) => {
             await Actors.destroy({where: {id: id}});
             let actor = knowActor.name
             return res.status(201).json({
-                Elimino: actor
+                message: "Se ha eliminado el actor de manera correcta",
+                Deleted: actor
             });
 
         } else {

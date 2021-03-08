@@ -4,7 +4,8 @@ import roleRoutes from "./routes/roles";
 import actorsRoutes from "./routes/imdb/actors";
 import directorsRoutes from "./routes/imdb/directors";
 import contentTypesRoutes from "./routes/imdb/contentTypes";
-import genreRoutes from "./routes/imdb/genres"
+import genresRoutes from "./routes/imdb/genres";
+import languagesRoutes from "./routes/imdb/languages";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -30,7 +31,8 @@ const authJWT = { secret: process.env.SECRET_KEY, algorithms: ["HS256"]}
 app.use("/api/v1", actorsRoutes);
 app.use("/api/v1", directorsRoutes);
 app.use("/api/v1", contentTypesRoutes);
-app.use("/api/v1", genreRoutes);
+app.use("/api/v1", genresRoutes);
+app.use("/api/v1", languagesRoutes);
 
 
 app.use("/api/v1",authRoutes);
