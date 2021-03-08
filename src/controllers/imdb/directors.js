@@ -119,13 +119,13 @@ export const deleteDirector = async(req, res) => {
             await Directors.destroy({where: {id: id}});
             let director = knowDirector.name
             return res.status(201).json({
-                Deleted: director,
+                Deleted: director
             });
 
         } else {
             return res.status(400).json({
                 message: "No existe el id del director"
-            })
+            });
         }
 
     } catch(error) {

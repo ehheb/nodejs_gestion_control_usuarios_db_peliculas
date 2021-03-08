@@ -119,7 +119,7 @@ export const deleteContentType = async(req, res) => {
             await ContentTypes.destroy({where: {id: id}});
             let contentType = knowContentType.name
             return res.status(201).json({
-                Deleted: contentType,
+                Deleted: contentType
             });
 
         } else {

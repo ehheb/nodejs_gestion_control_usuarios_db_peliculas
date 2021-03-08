@@ -3,7 +3,8 @@ import userRoutes from "./routes/users";
 import roleRoutes from "./routes/roles";
 import actorsRoutes from "./routes/imdb/actors";
 import directorsRoutes from "./routes/imdb/directors";
-import contentTypes from "./routes/imdb/contentTypes";
+import contentTypesRoutes from "./routes/imdb/contentTypes";
+import genreRoutes from "./routes/imdb/genres"
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -28,7 +29,9 @@ const authJWT = { secret: process.env.SECRET_KEY, algorithms: ["HS256"]}
 //Esta ruta se tiene proteger, pero para realiar que el código esté funcionando eso se deja para despúes
 app.use("/api/v1", actorsRoutes);
 app.use("/api/v1", directorsRoutes);
-app.use("/api/v1", contentTypes);
+app.use("/api/v1", contentTypesRoutes);
+app.use("/api/v1", genreRoutes);
+
 
 app.use("/api/v1",authRoutes);
 app.use("/api/v1", jwt(authJWT), userRoutes);
