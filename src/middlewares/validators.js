@@ -39,6 +39,25 @@ export const validateName = (schema) => {
     }
 }
 
+export const createContentRatingSchema = joi.object({
+    contentTypeId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    name: joi.string().required().messages(spanishJoi),
+    description: joi.string().required().messages(spanishJoi)
+});
+
+export const validateContentRating = (schema) => {
+    return async (req, res, next) => {
+        try {
+            const value = await schema.validateAsync(req.body);
+            next();
+        } catch(error) {
+            return res.status(400).json({
+                message: error.message
+            });
+        }
+    }
+}
+
 //Validaciones específicas para las funciones de los usuarios
 export const signupSchema = joi.object({
     firstName: joi.string().required().messages(spanishJoi),

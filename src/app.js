@@ -6,6 +6,7 @@ import directorsRoutes from "./routes/imdb/directors";
 import contentTypesRoutes from "./routes/imdb/contentTypes";
 import genresRoutes from "./routes/imdb/genres";
 import languagesRoutes from "./routes/imdb/languages";
+import contentRatingsRoutes from "./routes/imdb/contentRatings";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -33,6 +34,7 @@ app.use("/api/v1", directorsRoutes);
 app.use("/api/v1", contentTypesRoutes);
 app.use("/api/v1", genresRoutes);
 app.use("/api/v1", languagesRoutes);
+app.use("/api/v1", contentRatingsRoutes);
 
 
 app.use("/api/v1",authRoutes);
