@@ -53,7 +53,7 @@ module.exports = {
         type: Sequelize.JSON
       },
       languages: {
-        type: Sequelize.ARRAY(Sequelize.TEXT)
+        type: Sequelize.ARRAY(Sequelize.TEXT),
       },
       createdAt: {
         allowNull: false,

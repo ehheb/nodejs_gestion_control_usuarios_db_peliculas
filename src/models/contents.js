@@ -38,19 +38,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Contents.init({
-/*     contentRatingId: DataTypes.INTEGER,
-    contentTypeId: DataTypes.INTEGER, */
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
     totalSeasons: DataTypes.INTEGER,
     imdbScore: DataTypes.NUMERIC,
     releaseDates: DataTypes.STRING,
     playTime: DataTypes.STRING,
+    contentRatingId: DataTypes.INTEGER,
     totalEpisodes: DataTypes.INTEGER,
+    contentTypeId: DataTypes.INTEGER,
     imdbLink: DataTypes.STRING,
     imdbScoreVotes: DataTypes.INTEGER,
     ratingDetails: DataTypes.JSON,
-    languajes: DataTypes.JSON
+    languages: DataTypes.ARRAY(DataTypes.TEXT)
   }, {
     sequelize,
     modelName: 'Contents',
