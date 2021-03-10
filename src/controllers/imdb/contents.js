@@ -27,7 +27,7 @@ export const getContentById = async (req, res) => {
         });
 
         if(results) {
-            res.status(200).json({
+            return res.status(200).json({
                 results
             });
 
@@ -46,7 +46,6 @@ export const getContentById = async (req, res) => {
 }
 
 export const putContent = async (req, res) => {
-    //let data = req.body;
     let title = req.body.title;
     let description = req.body.description;
     let totalSeasons = req.body.totalSeasons;
@@ -61,35 +60,53 @@ export const putContent = async (req, res) => {
     let ratingDetails = req.body.ratingDetails;
     let languages = req.body.languages;
     try {
-        const newContent = await Contents.create({
-            title: title,
-            description: description,
-            totalSeasons: totalSeasons,
-            imdbScore: imdbScore,
-            releaseDates: releaseDates,
-            playTime: playTime,
-            contentRatingId: contentRatingId,
-            totalEpisodes, totalEpisodes,
-            contentTypeId: contentTypeId,
-            imdbLink: imdbLink,
-            imdbScoreVotes: imdbScoreVotes,
-            ratingDetails: ratingDetails,
-            languages: languages
-        });
-        
-        if(newContent) {
-            res.status(201).json({
-                message: "Contenido creado de manera éxitosa",
-                newContent
-            });
+        const contentRating = await ContentRatings.findOne({where: {id: contentRatingId}});
+
+        if(contentRating) {
+            const contentType = await ContentTypes.findOne({where: {id: contentTypeId}});
+
+            if(contentType) {
+                const newContent = await Contents.create({
+                    title: title,
+                    description: description,
+                    totalSeasons: totalSeasons,
+                    imdbScore: imdbScore,
+                    releaseDates: releaseDates,
+                    playTime: playTime,
+                    contentRatingId: contentRatingId,
+                    totalEpisodes, totalEpisodes,
+                    contentTypeId: contentTypeId,
+                    imdbLink: imdbLink,
+                    imdbScoreVotes: imdbScoreVotes,
+                    ratingDetails: ratingDetails,
+                    languages: languages
+                });
+                
+                if(newContent) {
+                    return res.status(201).json({
+                        message: "Contenido creado de manera éxitosa",
+                        newContent
+                    });
+                } else {
+                    return res.status(401).json({
+                        message: "Error al crear un nuevo contenido"
+                    });
+                }
+                
+            } else {
+                return res.status(401).json({
+                    message: "El id del tipo de contenido es inválido"
+                });
+            }
+
         } else {
-            res.status(401).json({
-                message: "Error al crear un nuevo contenido"
-            })
+            return res.status(401).json({
+                message: "El id del rating de contenido es inválido"
+            });
         }
 
     } catch(error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error al ingresar un nuevo contenido"
         });
     }
