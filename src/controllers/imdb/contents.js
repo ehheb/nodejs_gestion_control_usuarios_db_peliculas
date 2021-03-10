@@ -45,7 +45,7 @@ export const getContentById = async (req, res) => {
     }
 }
 
-export const putContent = async (req, res) => {
+export const createContent = async (req, res) => {
     let title = req.body.title;
     let description = req.body.description;
     let totalSeasons = req.body.totalSeasons;
@@ -60,13 +60,13 @@ export const putContent = async (req, res) => {
     let ratingDetails = req.body.ratingDetails;
     let languages = req.body.languages;
     try {
-        const contentRating = await ContentRatings.findOne({where: {id: contentRatingId}});
+        let contentRating = await ContentRatings.findOne({where: {id: contentRatingId}});
 
         if(contentRating) {
-            const contentType = await ContentTypes.findOne({where: {id: contentTypeId}});
+            let contentType = await ContentTypes.findOne({where: {id: contentTypeId}});
 
             if(contentType) {
-                const newContent = await Contents.create({
+                let newContent = await Contents.create({
                     title: title,
                     description: description,
                     totalSeasons: totalSeasons,

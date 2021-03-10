@@ -58,6 +58,35 @@ export const validateContentRating = (schema) => {
     }
 }
 
+export const createContentSchema = joi.object({
+    title: joi.string().required().messages(spanishJoi),
+    description: joi.string().required().messages(spanishJoi),
+    totalSeasons: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    imdbScore: joi.string().pattern(/[+-]?([0-9]*[.])?[0-9]+/, 'numbers').required().messages(spanishJoi),
+    releaseDates: joi.string().required().messages(spanishJoi),
+    playTime : joi.string().required().messages(spanishJoi),
+    contentRatingId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    totalEpisodes: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    contentTypeId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    imdbLink: joi.string().required().messages(spanishJoi),
+    imdbScoreVotes: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    ratingDetails: joi.string().required().messages(spanishJoi),
+    languages: joi.array().items(joi.string().required()).required().messages(spanishJoi)
+});
+
+export const validateContent = (schema) => {
+    return async (req, res, next) => {
+        try {
+            const value = await schema.validateAsync(req.body);
+            next();
+        } catch(error) {
+            return res.status(400).json({
+                message: error.message
+            });
+        }
+    }
+}
+
 //Validaciones específicas para las funciones de los usuarios
 export const signupSchema = joi.object({
     firstName: joi.string().required().messages(spanishJoi),

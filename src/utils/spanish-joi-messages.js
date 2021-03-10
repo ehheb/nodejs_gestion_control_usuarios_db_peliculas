@@ -88,5 +88,5 @@ export default {
     "string.ipVersion": "debe ser una dirección ip válida de una de las siguientes versiones {{version}} con un CDIR {{cidr}}",
     "string.empty": "el campo se encuentra vacío",
     "string.pattern.base": "el dato no cumple con las características específicas",
-    "string.pattern.name": "el dato debe de ser un número"
+    "string.pattern.name": "el dato debe de ser un número entero y sin punto decimal"
 }
