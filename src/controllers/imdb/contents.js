@@ -186,3 +186,29 @@ export const updateContent = async (req, res) => {
         });
     }
 }
+
+export const deleteContent = async (req, res) => {
+    let id = req.params.id;
+    try {
+        let findContent = await Contents.findOne({where: {id: id}});
+        
+        if(findContent) {
+            await Contents.destroy({where: {id: findContent.id}});
+            return res.status(201).json({
+                message: "Se eliminó de manera éxitosa el contenido",
+                findContent
+            });
+
+        } else {
+            return res.status(401).json({
+                message: "No existe algún contenido con ese id"
+            });
+        }
+    } catch(error) {
+        return res.status(500).json({
+            message: "Error al eliminar el contenido"
+        });
+    }
+
+
+}

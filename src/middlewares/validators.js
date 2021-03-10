@@ -58,6 +58,32 @@ export const validateContentRating = (schema) => {
     }
 }
 
+export const episodeSchema = joi.object({
+    seasonNum: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi), 
+    episodeName: joi.string().required().messages(spanishJoi), 
+    contentId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi), 
+    releaseDate: joi.string().required().messages(spanishJoi), 
+    episodeRating: joi.string().pattern(/[+-]?([0-9]*[.])?[0-9]+/, 'numbers').required().messages(spanishJoi), 
+    episodeNum: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi), 
+    description: joi.string().required().messages(spanishJoi), 
+    episodeImdbLink: joi.string().required().messages(spanishJoi), 
+    episodeScoreVotes: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
+});
+
+export const validateEpisode = (schema) => {
+    return async(req, res, next) => {
+        try {
+            const value = await schema.validateAsync(req.body);
+            next();
+
+        } catch(error) {
+            return res.status(400).json({
+                message: error.message
+            });
+        }
+    }
+}
+
 export const createContentSchema = joi.object({
     title: joi.string().required().messages(spanishJoi),
     description: joi.string().required().messages(spanishJoi),

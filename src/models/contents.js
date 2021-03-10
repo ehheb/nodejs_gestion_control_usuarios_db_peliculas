@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'contentTypeId'
       });
 
-      this.hasMany(models.EpisodeList, {
+      this.hasMany(models.EpisodeLists, {
         foreignKey: 'contentId'
       });
 
