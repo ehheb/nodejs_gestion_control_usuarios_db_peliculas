@@ -21,6 +21,39 @@ export const validateFindInUrl = (schema) => {
     }
 }
 
+export const contentActorIds = joi.object({
+    contentId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    actorId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
+})
+
+export const validatePivotTableUrl = (schema) => {
+    return async(req, res, next) => {
+        try {
+            const valure = await schema.validateAsync(req.params);
+            next();
+        } catch(error) {
+            res.status(400).json({
+                message: error.message
+            });
+        }
+    }
+}
+
+export const validatePivotTableBody = (schema) => {
+    return async(req, res, next) => {
+        try {
+            const valure = await schema.validateAsync(req.body);
+            next();
+        } catch(error) {
+            res.status(400).json({
+                message: error.message
+            });
+        }
+    }
+}
+
+
+
 //Validaciones genéricas para obtener el nombre de los actores, directores, generos, tipos, idiomas, etc
 export const createNameSchema = joi.object({
     name: joi.string().required().messages(spanishJoi)

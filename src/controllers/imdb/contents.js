@@ -209,6 +209,4 @@ export const deleteContent = async (req, res) => {
             message: "Error al eliminar el contenido"
         });
     }
-
-
 }
