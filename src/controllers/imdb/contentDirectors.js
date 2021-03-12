@@ -121,3 +121,130 @@ export const addContentDirector = async (req, res) => {
         });
     }
 }
+
+export const updateContentDirector = async(req, res) => {
+    let directorId = req.params.directorId;
+    let contentId = req.params.contentId;
+    let newDirectorId = req.body.newDirectorId;
+    let newContentId = req.body.newContentId;
+
+    try {
+        let findDirector = await Directors.findOne({where: {id: directorId}});
+
+        if(findDirector) {
+            let findContent = await Contents.findOne({where: {id: contentId}});
+
+            if(findContent) {
+                let findContentDirector = await ContentDirectors.findOne({where: {directorId: directorId, contentId: contentId}});
+
+                if(findContentDirector) {
+                    let verifyDirectorBody = await Directors.findOne({where: {id: newDirectorId}});
+
+                    if(verifyDirectorBody) {
+                        let verifyContentBody = await Contents.findOne({where: {id: newContentId}});
+
+                        if(verifyContentBody) {
+
+                            let updateContentDirector = await ContentDirectors.update(
+                                {directorId: newDirectorId, contentId: newContentId}, 
+                                {where: {directorId: directorId, contentId: contentId}}
+                                );
+        
+                            if(updateContentDirector) {
+                                let findNewCD = await ContentDirectors.findOne({where: {directorId: newDirectorId, contentId: newContentId}});
+                                return res.status(201).json({
+                                    message: "Se actualizó el registro del director con relación al contenido",
+                                    de: findContentDirector,
+                                    por: findNewCD
+                                });
+        
+                            } else {
+                                return res.status(401).json({
+                                    message: "Error al actualizar el contenido con relación al director, verifique que los id´s sean válidos"
+                                });
+                            }
+
+                        } else {
+                            return res.status(401).json({
+                                message: "Verifique que el id del contenido a actualizar sea válido"
+                            });
+                        }
+                    } else {
+                        return res.status(401).json({
+                            message: "Verifique que el id del director a actualizar sea válido"
+                        });
+                    }
+
+                } else {
+                    return res.status(401).json({
+                        message: "No se encontró una relación entre el director y el contenido"
+                    });
+                }
+
+            } else {
+                return res.status(401).json({
+                    message: "No se encontró un contenido con ese id"
+                });
+            }
+
+        } else {
+            return res.status(401).json({
+                message: "No se encontró un director con ese id"
+            });
+        }
+
+    } catch(error) {
+        return res.status(500).json({
+            message: "Error al actualizar el contenido con respecto al director"
+        });
+    }
+}
+
+export const deleteContentDirector = async(req, res) => {
+    let directorId = req.body.directorId;
+    let contentId = req.body.contentId;
+
+    try {
+        const findDirector = await Directors.findOne({where: {id: directorId}});
+
+        if(findDirector){
+            let directorName = findDirector.name
+
+            let findContent = await Contents.findOne({where: {id: contentId}});
+
+            if(findContent) {
+                let contentName = findContent.title;
+
+                let findContentDirector = await ContentDirectors.findOne({where: {directorId: directorId, contentId, contentId}});
+
+                if(findContentDirector) {
+                    await ContentDirectors.destroy({where: {directorId: directorId, contentId, contentId}});
+                    return res.status(201).json({
+                        message: "Se ha eliminado la siguiente relación de manera éxitosa: ",
+                        directorName,
+                        contentName
+                    });
+
+                } else {
+                    return res.status(401).json({
+                        message: "No existe relación entre el contenido y el director"
+                    });
+                }
+
+            } else {
+                return res.status(401).json({
+                    message: "No existe un contenido con ese id"
+                });
+            }
+
+        } else {
+            return res.status(401).json({
+                message: "No existe un director con ese id"
+            });
+        }
+    } catch(error) {
+        return res.status(500).json({
+            message: "Error al eliminar los datos del director y del contenido"
+        });
+    }
+}

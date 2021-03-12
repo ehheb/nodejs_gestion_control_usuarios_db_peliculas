@@ -138,24 +138,42 @@ export const updateContentActor = async(req, res) => {
                 let findContentActor = await ContentActors.findOne({where: {actorId: actorId, contentId: contentId}});
 
                 if(findContentActor) {
-                    let updateContentActor = await ContentActors.update(
-                        {actorId: newActorId, contentId: newContentId}, 
-                        {where: {actorId: actorId, contentId: contentId}}
-                        );
+                    let verifyActorBody = await Actors.findOne({where: {id: newActorId}});
 
-                    if(updateContentActor) {
-                        let findNewCA = await ContentActors.findOne({where: {actorId: newActorId, contentId: newContentId}});
-                        return res.status(201).json({
-                            message: "Se actualizó el registro del actor con relación al contenido",
-                            de: findContentActor,
-                            por: findNewCA
-                        });
+                    if(verifyActorBody) {
+                        let verifyContentBody = await Contents.findOne({where: {id: newContentId}});
+
+                        if(verifyContentBody) {
+                            let updateContentActor = await ContentActors.update(
+                                {actorId: newActorId, contentId: newContentId}, 
+                                {where: {actorId: actorId, contentId: contentId}}
+                                );
+        
+                            if(updateContentActor) {
+                                let findNewCA = await ContentActors.findOne({where: {actorId: newActorId, contentId: newContentId}});
+                                return res.status(201).json({
+                                    message: "Se actualizó el registro del actor con relación al contenido",
+                                    de: findContentActor,
+                                    por: findNewCA
+                                });
+        
+                            } else {
+                                return res.status(401).json({
+                                    message: "Error al actualizar el contenido con relación al actor"
+                                });
+                            }
+
+                        } else {
+                            return res.status(401).json({
+                                message: "Verifique que el id del contenido a actualizar sea válido"
+                            });
+                        }
 
                     } else {
                         return res.status(401).json({
-                            message: "Error al actualizar el contenido con relación al actor, verifique que los id´s sean válidos"
+                            message: "Verifique que el id del actor a actualizar sea válido"
                         });
-                    }
+                    } 
 
                 } else {
                     return res.status(401).json({

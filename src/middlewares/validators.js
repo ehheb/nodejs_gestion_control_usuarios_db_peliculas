@@ -26,10 +26,27 @@ export const contentActorIds = joi.object({
     actorId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
 })
 
+
+export const contentActorIdsBody = joi.object({
+    newContentId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    newActorId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
+})
+
+export const contentDirectorIds = joi.object({
+    contentId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    directorId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
+})
+
+
+export const contentDirectorIdsBody = joi.object({
+    newContentId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    newDirectorId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
+})
+
 export const validatePivotTableUrl = (schema) => {
     return async(req, res, next) => {
         try {
-            const valure = await schema.validateAsync(req.params);
+            const value = await schema.validateAsync(req.params);
             next();
         } catch(error) {
             res.status(400).json({
