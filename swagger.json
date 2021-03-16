@@ -10,6 +10,56 @@
         }
     },
     "paths": {
+        "/api/v1/actors": {
+            "get": {
+                "description": "Obtener a todos los actores",
+                "tags": ["Actors"],
+                "responses": {
+                    "201": {
+                        "description": "Se han traído todos los registros"
+                    }
+                }
+            },
+            "post": {
+                "description": "Agregar un nuevo actor",
+                "tags": ["Actors"],
+                "responses": {
+                    "201": {
+                        "description": "Se ha creado el nuevo actor"
+                    }
+                }
+            }
+        },
+        "/api/v1/actors/{id}": {
+            "get": {
+                "description": "Obtener un actor por su id",
+                "tags": ["Actors"],
+                "responses": {
+                    "201": {
+                        "description": "Se han traído todos los registros"
+                    }
+                }
+            },
+            "put": {
+                "description": "Se actualiza el actor por su id",
+                "tags": ["Actors"],
+                "responses": {
+                    "201": {
+                        "description": "Se ha actualizado los datos del actor"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Se elimina a un actor por su id",
+                "tags": ["Actors"],
+                "responses": {
+                    "201": {
+                        "description": "Se ha eliminado al actor de manera correcta"
+                    }
+                }
+            }
+
+        },
         "/api/v1/signup":{
             "post":{
                 "description": "Registro de nuevos usuarios y valida que el email no se encuentre previamente registrado",
@@ -274,6 +324,7 @@
                     }
                 }
             }
+            
         }
     }
 }
