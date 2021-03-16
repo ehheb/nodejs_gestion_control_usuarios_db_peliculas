@@ -98,7 +98,7 @@ export const addContentDirector = async (req, res) => {
                 } else {
                     return res.status(401).json({
                         message: "Ya existe esta relación del director y el contenido",
-                        actorName,
+                        directorName,
                         contentName
                     });
                 }
