@@ -42,12 +42,12 @@ export const isAdmin = async(req, res, next) => {
             next();
             
         } else {
-            res.status(400).json({
-                message: "No tienes permiso para acceder a esta ruta"
+            return res.status(400).json({
+                message: "No tienes permisos para realizar esta acción"
             });
         }
     } catch(error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error al obtener el recurso",
             error
         })
@@ -63,12 +63,12 @@ export const isEditor = async(req, res, next) => {
         if(userRole === "editor" || userRole === "administrador") {
             next();
         } else {
-            res.status(400).json({
-                message: "No tienes permiso para acceder a esta ruta"
+            return res.status(400).json({
+                message: "No tienes permisos para realizar esta acción"
             });
         }
     } catch(error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error al obtener el recurso",
             error
         })
@@ -84,12 +84,12 @@ export const isUser = async(req, res, next) => {
         if(userRole === "usuario" || userRole === "editor" || userRole === "administrador") {
             next();
         } else {
-            res.status(400).json({
-                message: "No tienes permiso para acceder a esta ruta"
+            return res.status(400).json({
+                message: "No tienes permisos para realizar esta acción"
             });
         }
     } catch(error) {
-        res.status(500).json({
+        return res.status(500).json({
             message: "Error al obtener el recurso",
             error
         })

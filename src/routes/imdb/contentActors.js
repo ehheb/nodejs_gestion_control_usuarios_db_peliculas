@@ -1,14 +1,14 @@
 import express from "express";
 import {findAll, findContentActor, addContentActor, updateContentActor, deleteContentActor} from "../../controllers/imdb/contentActors";
 import {validatePivotTableUrl, validatePivotTableBody, contentActorIds, contentActorIdsBody} from "../../middlewares/validators"
-
+import {getRole, isAdmin, isEditor, isUser} from "../../middlewares/roleAuth";
 
 const router = express.Router();
 
-router.get("/content/actor", findAll);
-router.get("/content/:contentId/actor/:actorId", validatePivotTableUrl(contentActorIds), findContentActor);
-router.post("/content/actor", validatePivotTableBody(contentActorIds), addContentActor);
-router.put("/content/:contentId/actor/:actorId", validatePivotTableUrl(contentActorIds),  validatePivotTableBody(contentActorIdsBody), updateContentActor);
-router.delete("/content/actor", validatePivotTableBody(contentActorIds), deleteContentActor);
+router.get("/content/actor",  getRole, isUser, findAll);
+router.get("/content/:contentId/actor/:actorId", getRole, isUser, validatePivotTableUrl(contentActorIds), findContentActor);
+router.post("/content/actor", getRole, isEditor, validatePivotTableBody(contentActorIds), addContentActor);
+router.put("/content/:contentId/actor/:actorId", getRole, isEditor, validatePivotTableUrl(contentActorIds),  validatePivotTableBody(contentActorIdsBody), updateContentActor);
+router.delete("/content/actor", getRole, isAdmin, validatePivotTableBody(contentActorIds), deleteContentActor);
 
 export default router;
