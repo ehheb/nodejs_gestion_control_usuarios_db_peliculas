@@ -43,6 +43,17 @@ export const contentDirectorIdsBody = joi.object({
     newDirectorId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
 })
 
+export const contentGenreIds = joi.object({
+    contentId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    genreId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
+})
+
+
+export const contentGenreIdsBody = joi.object({
+    newContentId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi),
+    newGenreId: joi.string().pattern(/^[0-9]+$/, 'numbers').required().messages(spanishJoi)
+})
+
 export const validatePivotTableUrl = (schema) => {
     return async(req, res, next) => {
         try {
