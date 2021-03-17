@@ -560,8 +560,273 @@
 
         },
         "/api/v1/content-ratings/{id}":{
-            
+            "parameters": [
+                {
+                    "schema": {},
+                    "in": "path",
+                    "name": "id",
+                    "description": "Agregue el id del rating del contenido",
+                    "required": true
+                }
+            ],
+            "get":{
+                "description": "Se obtiene un rating de contenido mediante su id",
+                "tags": ["Content-ratings"],
+                "responses": {
+                    "201":{
+                        "description": "Se obtiene por medio de su id de manera correcta el rating de contenido"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "put":{
+                "description": "Se actualiza el rating de contenido mediante su id",
+                "tags": ["Content-ratings"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/ContentRatings"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se actualiza de manera correcta el rating de contenido"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "delete":{
+                "description": "Se elimina un rating de contenido mediante su id",
+                "tags":["Content-ratings"],
+                "responses": {
+                    "201":{
+                        "description": "Se ha eliminado de manera correcta el rating de contenido"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
         },
+
+        "/api/v1/contents":{
+            "get":{
+                "description": "Se obtienen todos los contenidos",
+                "tags": ["Contents"],
+                "responses": {
+                    "201":{
+                        "description": "Se han obtenido todos los contenidos de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "post":{
+                "description": "Se crea un nuevo contenido colocando los datos solicitados",
+                "tags": ["Contents"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Contents"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se crea de manera correcta un nuevo contenido"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/contents/{id}":{
+            "parameters": [
+                {
+                    "schema": {},
+                    "in": "path",
+                    "name": "id",
+                    "description": "Agregue el id del contenido",
+                    "required": true
+                }
+            ],
+            "get":{
+                "description": "Se obtiene un contenido por medio de su id",
+                "tags": ["Contents"],
+                "responses": {
+                    "201":{
+                        "description": "Se encontró por medio del id el contenido"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "put":{
+                "description": "Se actualiza el contenido por medio de su id y colocando los datos dentro del cuerpo",
+                "tags": ["Contents"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Contents"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se ha actualizado de manera correcta el contenido"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "delete":{
+                "description": "Se elimina un contenido por medio de su id",
+                "tags": ["Contents"],
+                "responses": {
+                    "201":{
+                        "description": "Se ha eliminado el contenido de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+
+        "/api/v1/episode-list":{
+            "get":{
+                "description": "Se obtiene toda la lista de episodios",
+                "tags": ["Episode-list"],
+                "responses": {
+                    "201":{
+                        "description": "Se obtienen de manera correcta toda la lista de episodios"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "post":{
+                "description": "Se añade un nuevo episodio",
+                "tags": ["Episode-list"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/EpisodeLists"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se añade de manera correcta un nuevo episodio"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+
+        "/api/v1/episode-list/{id}":{
+            "parameters": [
+                {
+                    "schema": {},
+                    "in": "path",
+                    "name": "id",
+                    "description": "Agregue el id de la lista de episodios",
+                    "required": true
+                }
+            ],
+            "get":{
+                "description": "Por medio del id se busca un episodio",
+                "tags": ["Episode-list"],
+                "responses": {
+                    "201":{
+                        "description": "Se ha encontrado de manera correcta el episodio"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]    
+            },
+            "put":{
+                "description": "Se actualiza un eposidio mediante su id, colocando dentro del cuerpo los datos solicitados",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/EpisodeLists"
+                            }
+                        }
+                    }
+                },
+                "tags": ["Episode-list"],
+                "responses": {
+                    "201":{
+                        "description": "Se ha actualizado el episodio de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "delete":{
+                "description": "Se elimina un episodio mediante su id",
+                "tags": ["Episode-list"],
+                "responses": {
+                    "201":{
+                        "description": "Se ha eliminado el episodio de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+
 
         "/api/v1/signup":{
             "post":{
@@ -906,7 +1171,7 @@
                     "ratingDetails":{
                         "type": "string"
                     },
-                    "languahes":{
+                    "languages":{
                         "type": "string"
                     }
                 }
@@ -963,7 +1228,7 @@
                     "episodeName",
                     "contentId",
                     "releaseDate",
-                    "epidoseRating",
+                    "episodeRating",
                     "episodeNum",
                     "description",
                     "episodeImdbLink",
