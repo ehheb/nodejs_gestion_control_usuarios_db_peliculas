@@ -16,38 +16,85 @@
                 "tags": ["Actors"],
                 "responses": {
                     "201": {
-                        "description": "Se han traído todos los registros"
+                        "description": "Se obtienen de manera correcta todos los registros de actores"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
             },
             "post": {
                 "description": "Agregar un nuevo actor",
                 "tags": ["Actors"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Actors"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
-                        "description": "Se ha creado el nuevo actor"
+                        "description": "Se crea el actor de manera correcta"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
             }
         },
         "/api/v1/actors/{id}": {
+            "parameters": [
+                {
+                    "schema": {},
+                    "in": "path",
+                    "name": "id",
+                    "description": "Agregue el id del actor",
+                    "required": true
+                }
+            ],
             "get": {
                 "description": "Obtener un actor por su id",
-                "tags": ["Actors"],
+                "tags": ["Actors"],                
                 "responses": {
                     "201": {
-                        "description": "Se han traído todos los registros"
+                        "description": "Se obtiene el actor de manera correcta"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
             },
             "put": {
                 "description": "Se actualiza el actor por su id",
                 "tags": ["Actors"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Actors"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "201": {
                         "description": "Se ha actualizado los datos del actor"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
             },
             "delete": {
                 "description": "Se elimina a un actor por su id",
@@ -56,10 +103,466 @@
                     "201": {
                         "description": "Se ha eliminado al actor de manera correcta"
                     }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/directors": {
+            "get": {
+                "description": "Obtener a todos los directores",
+                "tags": ["Directors"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Directors"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Se obtienen de manera correcta todos los registros de los directores"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "post": {
+                "description": "Agregar un nuevo director",
+                "tags": ["Directors"],
+                "responses": {
+                    "201": {
+                        "description": "Se ha creado un nuevo director"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/directors/{id}": {
+            "parameters": [
+                {
+                    "schema": {},
+                    "in": "path",
+                    "name": "id",
+                    "description": "Agregue el id del director",
+                    "required": true
                 }
+            ],
+            "get": {
+                "description": "Obtener a un director por su id",
+                "tags": ["Directors"],
+                "responses": {
+                    "201": {
+                        "description": "Se obtiene de manera correcta al director"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "put": {
+                "description": "Se actualiza el director por su id",
+                "tags": ["Directors"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Directors"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Se ha actualizado los datos del director"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "delete": {
+                "description": "Se elimina a un director por su id para eliminarlo",
+                "tags": ["Directors"],
+                "responses": {
+                    "201": {
+                        "description": "Se ha eliminado al director de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
             }
 
         },
+        "/api/v1/genres": {
+            "get": {
+                "description": "Obtener todos los géneros",
+                "tags": ["Genres"],
+                "responses": {
+                    "201": {
+                        "description": "Se han traído todos los registros de los géneros"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "post": {
+                "description": "Agregar un nuevo género",
+                "tags": ["Genres"],
+                "requestBody": {
+                    "content": {
+                        "application/json":{
+                            "schema": {
+                                "$ref": "#/components/schemas/Genres"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Se ha creado el nuevo género"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/genres/{id}": {
+            "parameters": [
+                {
+                    "schema": {},
+                    "in": "path",
+                    "name": "id",
+                    "description": "Agregue el id del género",
+                    "required": true
+                }
+            ],
+            "get": {
+                "description": "Obtener un género por su id",
+                "tags": ["Genres"],
+                "responses": {
+                    "201": {
+                        "description": "Se encontró el género con ese id"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "put": {
+                "description": "Se actualiza el género por su id",
+                "tags": ["Genres"],
+                "requestBody": {
+                    "content": {
+                        "application/json":{
+                            "schema": {
+                                "$ref": "#/components/schemas/Genres"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Se ha actualizado los datos del género"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "delete": {
+                "description": "Se elimina un género por su id",
+                "tags": ["Genres"],
+                "responses": {
+                    "201": {
+                        "description": "Se ha eliminado el género de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/languages":{
+            "get":{
+                "description": "Obtener todos los idiomas",
+                "tags":["Languages"],
+                "responses": {
+                    "201":{
+                        "description": "Se han obtenido todos los idiomas de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "post":{
+                "description": "Agregar un nuevo idioma",
+                "tags": ["Languages"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Languages"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se ha agregado un nuevo idioma de manera correctoa"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/languages/{id}":{
+            "parameters": [
+                {
+                    "schema": {},
+                    "in": "path",
+                    "name": "id",
+                    "description": "Agregue el id del idioma",
+                    "required": true
+                }
+            ],
+            "get":{
+                "description": "Obtener un idioma por medio de su id",
+                "tags": ["Languages"],
+                "responses": {
+                    "201":{
+                        "description": "Se ha obtenido de manera correcta un idioma por su id"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "put":{
+                "description": "Actualizar un idioma por medio de su id",
+                "tags": ["Languages"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Languages"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se ha actualizado el idioma"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "delete":{
+                "description": "Elimimar un idioma por medio de su id",
+                "tags":["Languages"],
+                "responses": {
+                    "201":{
+                        "description": "Se ha eliminado el idioma de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+
+        "/api/v1/content-types":{
+            "get":{
+                "description": "Obtener todos los tipos de contenidos",
+                "tags":["Content-types"],
+                "responses": {
+                    "201":{
+                        "description": "Se han obtenido todos los tipos de contenido de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "post":{
+                "description": "Agregar un nuevo tipo de contenido",
+                "tags": ["Content-types"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/ContentTypes"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se ha agregado un nuevo tipo de contenido de manera correctoa"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+        "/api/v1/content-types/{id}":{
+            "parameters": [
+                {
+                    "schema": {},
+                    "in": "path",
+                    "name": "id",
+                    "description": "Agregue el id del tipo de contenido",
+                    "required": true
+                }
+            ],
+            "get":{
+                "description": "Obtener un tipo de contenido por medio de su id",
+                "tags": ["Content-types"],
+                "responses": {
+                    "201":{
+                        "description": "Se ha obtenido de manera correcta un tipo de contenido por su id"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "put":{
+                "description": "Actualizar un tipo de contenido por medio de su id",
+                "tags": ["Content-types"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/ContentTypes"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se ha actualizado el tipo de contenido"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "delete":{
+                "description": "Elimimar un tipo de contenido por medio de su id",
+                "tags":["Content-types"],
+                "responses": {
+                    "201":{
+                        "description": "Se ha eliminado el tipo de contenido de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+        },
+
+        "/api/v1/content-ratings":{
+            "get":{
+                "description": "Obtener todos los ratings de contenido",
+                "tags":["Content-ratings"],
+
+                "responses": {
+                    "201":{
+                        "description": "Se han obtenido los ratings de contenido de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            },
+            "post":{
+                "description": "Crear un nuevo rating de contenido",
+                "tags": ["Content-ratings"],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/ContentRatings"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201":{
+                        "description": "Se ha registrado un nuevo rating de contenido de manera correcta"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt":[]
+                    }
+                ]
+            }
+
+        },
+        "/api/v1/content-ratings/{id}":{
+            
+        },
+
         "/api/v1/signup":{
             "post":{
                 "description": "Registro de nuevos usuarios y valida que el email no se encuentre previamente registrado",
@@ -275,6 +778,227 @@
             }
         },
         "schemas": {
+            "Actors": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Directors": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Genres": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Languages": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name":{
+                        "type": "string"
+                    }
+                }
+            },
+            "ContentTypes": {
+                "type": "object",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name":{
+                        "type": "string"
+                    }
+                }
+            },
+            "ContentRatings": {
+                "type": "object",
+                "required": [
+                    "contentTypeId",
+                    "name",
+                    "description"
+                ],
+                "properties": {
+                    "contentTypeId":{
+                        "type": "integer"
+                    },
+                    "name":{
+                        "type": "string"
+                    },
+                    "description":{
+                        "type":"string"
+                    }
+                }
+            },
+            "Contents":{
+                "type": "object",
+                "required": [
+                    "title",
+                    "description",
+                    "totalSeasons",
+                    "imdbScore",
+                    "releaseDates",
+                    "playTime",
+                    "contentRatingId",
+                    "totalEpisodes",
+                    "contentTypeId",
+                    "imdbLink",
+                    "imdbScoreVotes",
+                    "ratingDetails",
+                    "languages"
+                ],
+                "properties": {
+                    "title":{
+                        "type": "string"
+                    },
+                    "description":{
+                        "type": "string"
+                    },
+                    "totalSeasons":{
+                        "type": "integer"
+                    },
+                    "imdbScore":{
+                        "type": "number"
+                    },
+                    "releaseDates":{
+                        "type": "string"
+                    },
+                    "playTime":{
+                        "type": "string"
+                    },
+                    "contentRatingId":{
+                        "type": "integer"
+                    },
+                    "totalEpisodes":{
+                        "type": "integer"
+                    },
+                    "contentTypeId":{
+                        "type": "integer"
+                    },
+                    "imdbLink":{
+                        "type": "string"
+                    },
+                    "imdbScoreVotes":{
+                        "type": "number"
+                    },
+                    "ratingDetails":{
+                        "type": "string"
+                    },
+                    "languahes":{
+                        "type": "string"
+                    }
+                }
+            },
+            "ContentActors":{
+                "type": "object",
+                "required": [
+                    "actorId",
+                    "contentId"
+                ],
+                "properties": {
+                    "actorId":{
+                        "type": "integer"
+                    },
+                    "contentId":{
+                        "type": "integer"
+                    }
+                }
+            },
+            "ContentDirectors":{
+                "type": "object",
+                "required": [
+                    "directorId",
+                    "contentId"
+                ],
+                "properties": {
+                    "directorId":{
+                        "type": "integer"
+                    },
+                    "contentId":{
+                        "type": "integer"
+                    }
+                }
+            },
+            "ContentGenres":{
+                "type": "object",
+                "required": [
+                    "genreId",
+                    "contentId"
+                ],
+                "properties": {
+                    "genreId":{
+                        "type": "integer"
+                    },
+                    "contentId":{
+                        "type": "integer"
+                    }
+                }
+            },
+            "EpisodeLists":{
+                "type": "object",
+                "required": [
+                    "seasonNum",
+                    "episodeName",
+                    "contentId",
+                    "releaseDate",
+                    "epidoseRating",
+                    "episodeNum",
+                    "description",
+                    "episodeImdbLink",
+                    "episodeScoreVotes"
+                ],
+                "properties": {
+                    "seasonNum":{
+                        "type": "integer"
+                    },
+                    "episodeName":{
+                        "type": "string"
+                    },
+                    "contentId":{
+                        "type": "integer"
+                    },
+                    "releaseDate":{
+                        "type": "string"
+                    },
+                    "episodeRating":{
+                        "type": "number"
+                    },
+                    "episodeNum":{
+                        "type": "integer"
+                    },
+                    "description":{
+                        "type": "string"
+                    },
+                    "episodeImdbLink":{
+                        "type": "string"
+                    },
+                    "episodeScoreVotes":{
+                        "type": "number"
+                    }
+                }
+            },
             "Users": {
                 "type": "object",
                 "required": [
