@@ -1133,7 +1133,7 @@
                     "content": {
                         "application/json":{
                             "schema":{
-                                "$ref": "#/components/schemas/ContentActors"
+                                "$ref": "#/components/schemas/NewContentActors"
                             }
                         }
                     }
@@ -1252,7 +1252,7 @@
                     "content": {
                         "application/json":{
                             "schema":{
-                                "$ref": "#/components/schemas/ContentDirectors"
+                                "$ref": "#/components/schemas/NewContentDirectors"
                             }
                         }
                     }
@@ -1371,7 +1371,7 @@
                     "content": {
                         "application/json":{
                             "schema":{
-                                "$ref": "#/components/schemas/ContentGenres"
+                                "$ref": "#/components/schemas/NewContentGenres"
                             }
                         }
                     }
@@ -1441,10 +1441,10 @@
                 ],
                 "properties": {
                     "userId":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "roleId":{
-                        "type": "integer"
+                        "type": "string"
                     }
                 }
             },
@@ -1512,13 +1512,13 @@
                 ],
                 "properties": {
                     "contentTypeId":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "name":{
                         "type": "string"
                     },
                     "description":{
-                        "type":"string"
+                        "type": "string"
                     }
                 }
             },
@@ -1547,10 +1547,10 @@
                         "type": "string"
                     },
                     "totalSeasons":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "imdbScore":{
-                        "type": "number"
+                        "type": "string"
                     },
                     "releaseDates":{
                         "type": "string"
@@ -1559,25 +1559,28 @@
                         "type": "string"
                     },
                     "contentRatingId":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "totalEpisodes":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "contentTypeId":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "imdbLink":{
                         "type": "string"
                     },
                     "imdbScoreVotes":{
-                        "type": "number"
+                        "type": "string"
                     },
                     "ratingDetails":{
                         "type": "string"
                     },
                     "languages":{
-                        "type": "string"
+                        "type": "array",
+                        "items":{
+                            "type": "string"
+                        }
                     }
                 }
             },
@@ -1589,10 +1592,25 @@
                 ],
                 "properties": {
                     "actorId":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "contentId":{
-                        "type": "integer"
+                        "type": "string"
+                    }
+                }
+            },
+            "NewContentActors":{
+                "type": "object",
+                "required": [
+                    "newActorId",
+                    "newContentId"
+                ],
+                "properties": {
+                    "newActorId":{
+                        "type": "string"
+                    },
+                    "newContentId":{
+                        "type": "string"
                     }
                 }
             },
@@ -1604,10 +1622,25 @@
                 ],
                 "properties": {
                     "directorId":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "contentId":{
-                        "type": "integer"
+                        "type": "string"
+                    }
+                }
+            },
+            "NewContentDirectors":{
+                "type": "object",
+                "required": [
+                    "newDirectorId",
+                    "newContentId"
+                ],
+                "properties": {
+                    "newDirectorId":{
+                        "type": "string"
+                    },
+                    "newContentId":{
+                        "type": "string"
                     }
                 }
             },
@@ -1619,10 +1652,25 @@
                 ],
                 "properties": {
                     "genreId":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "contentId":{
-                        "type": "integer"
+                        "type": "string"
+                    }
+                }
+            },
+            "NewContentGenres":{
+                "type": "object",
+                "required": [
+                    "newGenreId",
+                    "newContentId"
+                ],
+                "properties": {
+                    "newGenreId":{
+                        "type": "string"
+                    },
+                    "newContentId":{
+                        "type": "string"
                     }
                 }
             },
@@ -1641,22 +1689,22 @@
                 ],
                 "properties": {
                     "seasonNum":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "episodeName":{
                         "type": "string"
                     },
                     "contentId":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "releaseDate":{
                         "type": "string"
                     },
                     "episodeRating":{
-                        "type": "number"
+                        "type": "string"
                     },
                     "episodeNum":{
-                        "type": "integer"
+                        "type": "string"
                     },
                     "description":{
                         "type": "string"
@@ -1665,7 +1713,7 @@
                         "type": "string"
                     },
                     "episodeScoreVotes":{
-                        "type": "number"
+                        "type": "string"
                     }
                 }
             }            
