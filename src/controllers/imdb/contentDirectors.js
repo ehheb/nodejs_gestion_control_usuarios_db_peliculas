@@ -125,7 +125,7 @@ export const addContentDirector = async (req, res) => {
     }
 }
 
-//Actualizar la relación de un actor y/o contenido
+//Actualizar la relación de un actor con un contenido
 export const updateContentDirector = async(req, res) => {
     let directorId = req.params.directorId;
     let contentId = req.params.contentId;
