@@ -1,4 +1,4 @@
-import {ContentTypes} from "../../models";
+import {ContentTypes, Contents, ContentRatings} from "../../models";
 
 //Función para obtener a todos los tipos de contenido
 export const getAllContentTypes = async(req, res) => {
@@ -116,12 +116,31 @@ export const deleteContentType = async(req, res) => {
         let knowContentType = await ContentTypes.findOne({where: {id: id}});
 
         if(knowContentType) {
-            await ContentTypes.destroy({where: {id: id}});
-            let contentType = knowContentType.name
-            return res.status(201).json({
-                message: "Se ha eliminado el tipo de contenido de manera correcta",
-                Deleted: contentType
-            });
+            let knowRating = await ContentRatings.findOne({where: {contentTypeId: id}});
+
+            if(!knowRating) {
+                let knowContent = await Contents.findOne({where: {contentTypeId: id}});
+
+                if(!knowContent) {
+                    await ContentTypes.destroy({where: {id: id}});
+                    let contentType = knowContentType.name
+                    return res.status(201).json({
+                        message: "Se ha eliminado el tipo de contenido de manera correcta",
+                        Deleted: contentType
+                    });
+
+                } else {
+                    return res.status(401).json({
+                        message: "No se puede eliminar el tipo de contenido ya que se encuentra relaconado con un contenido"
+                    });
+                }
+
+            } else {
+                return res.status(401).json({
+                    message: "No se puede eliminar el tipo de contenido ya que se encuentra relacionado con un rating de contenido"
+                });
+            }
+            
 
         } else {
             return res.status(400).json({

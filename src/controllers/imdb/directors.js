@@ -1,4 +1,4 @@
-import {Directors} from "../../models";
+import {Directors, ContentDirectors} from "../../models";
 
 //Función para obtener a todos los directores
 export const getAllDirectors = async(req, res) => {
@@ -116,12 +116,20 @@ export const deleteDirector = async(req, res) => {
         let knowDirector = await Directors.findOne({where: {id: id}});
 
         if(knowDirector) {
-            await Directors.destroy({where: {id: id}});
-            let director = knowDirector.name
-            return res.status(201).json({
-                message: "Se ha eliminado el director de manera correcta",
-                Deleted: director
-            });
+            let knowContent = await ContentDirectors.findOne({where: {directorId: id}});
+            
+            if(knowContent) {
+                return res.status(401).json({
+                    message: "No se puede elimimnar a este actor ya que se encuentra relacionado con algún contenido"
+                })
+            } else {
+                await Directors.destroy({where: {id: id}});
+                let director = knowDirector.name
+                return res.status(201).json({
+                    message: "Se ha eliminado el director de manera correcta",
+                    Deleted: director
+                });
+            }
 
         } else {
             return res.status(400).json({

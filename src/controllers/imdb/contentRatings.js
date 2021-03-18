@@ -1,4 +1,4 @@
-import {ContentRatings, ContentTypes} from "../../models";
+import {ContentRatings, ContentTypes, Contents} from "../../models";
 
 //Obtener todos los ratings con relación al contenido
 export const getAllContentRatings = async(req, res) => {
@@ -115,12 +115,20 @@ export const deleteContentRating = async (req, res) => {
     try {
         const knowContentRating = await ContentRatings.findOne({where: {id: id}});
         if(knowContentRating) {
-            
-            await ContentRatings.destroy({where: {id: id}});
-            return res.status(201).json({
-                message: "Se eliminó de manera exitosa el registro del rating de contenido",
-                knowContentRating
-            });
+            let knowContent = await Contents.findOne({where: {contentRatingId: id}});
+
+            if(!knowContent) {
+                    await ContentRatings.destroy({where: {id: id}});
+                    return res.status(201).json({
+                        message: "Se eliminó de manera exitosa el registro del rating de contenido",
+                        knowContentRating
+                    });
+                
+            } else {
+                return res.status(401).json({
+                    message: "No se puede eliminar este rating ya que se encuentra relacionado con algún contenido"
+                });
+            }
         } else {
             return res.status(401).json({
                 message: "No existe el id del rating de contenido"

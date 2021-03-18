@@ -1,4 +1,4 @@
-import {Actors} from "../../models";
+import {Actors, ContentActors} from "../../models";
 
 //Función para obtener a todos los actores
 export const getAllActors = async(req, res) => {
@@ -116,12 +116,20 @@ export const deleteActor = async(req, res) => {
         let knowActor = await Actors.findOne({where: {id: id}});
 
         if(knowActor) {
-            await Actors.destroy({where: {id: id}});
-            let actor = knowActor.name
-            return res.status(201).json({
-                message: "Se ha eliminado el actor de manera correcta",
-                Deleted: actor
-            });
+            let knowContent = await ContentActors.findOne({where: {actorId: id}})
+            if(knowContent) {
+                return res.status(401).json({
+                    message: "No se puede eliminar a este actor ya que tiene relación con algún contenido"
+                });
+
+            }else {
+                await Actors.destroy({where: {id: id}});
+                let actor = knowActor.name
+                return res.status(201).json({
+                    message: "Se ha eliminado el actor de manera correcta",
+                    Deleted: actor
+                });
+            }
 
         } else {
             return res.status(400).json({

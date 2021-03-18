@@ -1,4 +1,4 @@
-import {Genres} from "../../models";
+import {Genres, ContentGenres} from "../../models";
 
 //Función para obtener todos los géneros
 export const getAllGenres = async(req, res) => {
@@ -116,12 +116,19 @@ export const deleteGenre = async(req, res) => {
         let knowGenre = await Genres.findOne({where: {id: id}});
 
         if(knowGenre) {
-            await Genres.destroy({where: {id: id}});
-            let genre = knowGenre.name
-            return res.status(201).json({
-                message: "Se ha eliminado el género de manera correcta",
-                Deleted: genre
-            });
+            let knowContent = await ContentGenres.findOne({where: {genreId: id}});
+            if(knowContent) {
+                return res.status(401).json({
+                    message: "No se puede eliminar el género ya que se encuentra relacionado con algún contenido"
+                });
+            } else {
+                await Genres.destroy({where: {id: id}});
+                let genre = knowGenre.name
+                return res.status(201).json({
+                    message: "Se ha eliminado el género de manera correcta",
+                    Deleted: genre
+                });
+            }
 
         } else {
             return res.status(400).json({

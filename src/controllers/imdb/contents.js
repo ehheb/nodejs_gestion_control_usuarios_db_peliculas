@@ -1,4 +1,4 @@
-import {Contents, ContentTypes, ContentRatings} from "../../models";
+import {Contents, ContentTypes, ContentRatings, ContentActors, ContentDirectors, ContentGenres} from "../../models";
 
 //Obtener todos los contenidos
 export const getAllContents = async (req, res) => {
@@ -198,11 +198,37 @@ export const deleteContent = async (req, res) => {
         let findContent = await Contents.findOne({where: {id: id}});
         
         if(findContent) {
-            await Contents.destroy({where: {id: findContent.id}});
-            return res.status(201).json({
-                message: "Se eliminó de manera éxitosa el contenido",
-                findContent
-            });
+            knowActor = await ContentActors.findOne({where: {contentId: id}});
+            
+            if(!knowActor) {
+                knowDirector = await ContentDirectors.findOne({where: {contentId: od}});
+
+                if(!knowDirector){
+                    knowGenre = await ContentGenres.findOne({where: {contentId: id}});
+
+                    if(!knowGenre) {
+                        await Contents.destroy({where: {id: findContent.id}});
+                        return res.status(201).json({
+                            message: "Se eliminó de manera éxitosa el contenido",
+                            findContent
+                        });
+
+                    } else {
+                        return res.status(401).json({
+                            message: "No se puede eliminar el contenido ya que se encuentra relacionado con un género"
+                        });
+                    }
+
+                } else {
+                    return res.status(401).json({
+                        message: "No se puede eliminar el contenido debido a que se encuentra relacionado con un actor"
+                    });
+                }
+            } else {                
+                return res.status(401).json({
+                    message: "No se puede eliminar el contenido ya que se encuentra relacionado con un actor"
+                });
+            }
 
         } else {
             return res.status(401).json({
