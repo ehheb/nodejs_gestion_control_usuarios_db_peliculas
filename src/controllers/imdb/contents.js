@@ -1,5 +1,6 @@
 import {Contents, ContentTypes, ContentRatings} from "../../models";
 
+//Obtener todos los contenidos
 export const getAllContents = async (req, res) => {
     
     try {
@@ -17,6 +18,7 @@ export const getAllContents = async (req, res) => {
     }
 }
 
+//Obtener un contenido por su id
 export const getContentById = async (req, res) => {
     let id = req.params.id;
 
@@ -45,6 +47,7 @@ export const getContentById = async (req, res) => {
     }
 }
 
+//Crear un nuevo contenido
 export const createContent = async (req, res) => {
     let title = req.body.title;
     let description = req.body.description;
@@ -112,6 +115,7 @@ export const createContent = async (req, res) => {
     }
 }
 
+//Actualizar un contenido por medio de su id y de sus atributos
 export const updateContent = async (req, res) => {
     let id = req.params.id;
 
@@ -187,6 +191,7 @@ export const updateContent = async (req, res) => {
     }
 }
 
+//Eliminar un contenido por medio de su id
 export const deleteContent = async (req, res) => {
     let id = req.params.id;
     try {

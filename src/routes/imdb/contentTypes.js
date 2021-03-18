@@ -4,7 +4,8 @@ import {validateName, createNameSchema, validateFindInUrl, findInUrl} from "../.
 import {getRole, isAdmin, isEditor, isUser} from "../../middlewares/roleAuth";
 
 const router = express.Router();
-//Rutas de los tipos de contenido
+
+//Rutas de los tipos de contenidos
 router.get("/content-types", getRole, isUser, getAllContentTypes);
 router.get("/content-types/:id", getRole, isUser, validateFindInUrl(findInUrl), getContentTypeById);
 router.post("/content-types", getRole, isEditor, validateName(createNameSchema), postContentType);

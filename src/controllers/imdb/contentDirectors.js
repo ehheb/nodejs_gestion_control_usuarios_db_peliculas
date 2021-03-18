@@ -1,5 +1,6 @@
 import {ContentDirectors, Directors, Contents} from "../../models";
 
+//Encontrar a un director con relación al contenido
 export const findAll = async(req, res) => {
     try {
         let results = await ContentDirectors.findAll({include:[Directors, Contents]});
@@ -16,6 +17,7 @@ export const findAll = async(req, res) => {
     }
 }
 
+//Encontrar un director y un contenido con relación a sus id´s
 export const findContentDirector = async(req, res) => {
     let directorId = req.params.directorId;
     let contentId = req.params.contentId;
@@ -64,6 +66,7 @@ export const findContentDirector = async(req, res) => {
     }
 }
 
+//Añadir a un director con relación al contenido
 export const addContentDirector = async (req, res) => {
     let directorId = req.body.directorId;
     let contentId = req.body.contentId;
@@ -122,6 +125,7 @@ export const addContentDirector = async (req, res) => {
     }
 }
 
+//Actualizar la relación de un actor y/o contenido
 export const updateContentDirector = async(req, res) => {
     let directorId = req.params.directorId;
     let contentId = req.params.contentId;
@@ -200,6 +204,7 @@ export const updateContentDirector = async(req, res) => {
     }
 }
 
+//Eliminar a un actor con relación al contenido
 export const deleteContentDirector = async(req, res) => {
     let directorId = req.body.directorId;
     let contentId = req.body.contentId;

@@ -5,6 +5,7 @@ import {getRole, isAdmin, isEditor, isUser} from "../../middlewares/roleAuth";
 
 const router = express.Router();
 
+//Rutas de los episodios
 router.get("/episode-list", getRole, isUser, getAllEpisodeList);
 router.get("/episode-list/:id", getRole, isUser, validateFindInUrl(findInUrl), getEpisodeById);
 router.post("/episode-list", getRole, isEditor, validateEpisode(episodeSchema), createEpisode);

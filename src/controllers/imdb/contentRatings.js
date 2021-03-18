@@ -1,7 +1,6 @@
 import {ContentRatings, ContentTypes} from "../../models";
 
-
-
+//Obtener todos los ratings con relación al contenido
 export const getAllContentRatings = async(req, res) => {
     try {
         let results = await ContentRatings.findAll({include:[ContentTypes]});
@@ -17,6 +16,7 @@ export const getAllContentRatings = async(req, res) => {
     }
 }
 
+//Obtener a un rating y al contenido con relación a los id´s
 export const getContentRatingsById = async(req, res) => {
     try {
         let id = req.params.id;
@@ -38,6 +38,7 @@ export const getContentRatingsById = async(req, res) => {
     }
 }
 
+//Añadir un rating con relación al contenido
 export const createContentRating = async (req, res) => {
     let contentTypeId = req.body.contentTypeId;
     let name = req.body.name;
@@ -66,6 +67,7 @@ export const createContentRating = async (req, res) => {
     }
 }
 
+//Actualizar un rating con relación al contenido
 export const updateContentRating = async (req, res) => {
     let id = req.params.id;
     let contentTypeId = req.body.contentTypeId;
@@ -106,6 +108,7 @@ export const updateContentRating = async (req, res) => {
     }
 }
 
+//Eliminar un rating con relación al contenido
 export const deleteContentRating = async (req, res) => {
     let id = req.params.id;
 

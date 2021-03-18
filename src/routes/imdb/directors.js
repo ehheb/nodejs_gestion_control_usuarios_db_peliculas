@@ -4,6 +4,7 @@ import {validateName, createNameSchema, validateFindInUrl, findInUrl} from "../.
 import {getRole, isAdmin, isEditor, isUser} from "../../middlewares/roleAuth";
 
 const router = express.Router();
+
 //Rutas de los directores
 router.get("/directors", getRole, isUser, getAllDirectors);
 router.get("/directors/:id", getRole, isUser, validateFindInUrl(findInUrl), getDirectorById);

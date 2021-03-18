@@ -5,6 +5,7 @@ import {getRole, isAdmin, isEditor, isUser} from "../../middlewares/roleAuth";
 
 const router = express.Router();
 
+//Rutas de los géneros con respecto a los contenidos
 router.get("/content/genre", getRole, isUser, findAll);
 router.get("/content/:contentId/genre/:genreId", getRole, isUser, validatePivotTableUrl(contentGenreIds), findContentGenre);
 router.post("/content/genre", getRole, isEditor, validatePivotTableBody(contentGenreIds), addContentGenre);

@@ -5,6 +5,7 @@ import {getRole, isAdmin, isEditor, isUser} from "../../middlewares/roleAuth";
 
 const router = express.Router();
 
+//Rutas de los contenidos
 router.get("/contents", getRole, isUser, getAllContents);
 router.get("/contents/:id", getRole, isUser, validateFindInUrl(findInUrl), getContentById);
 router.post("/contents", getRole, isEditor, validateContent(createContentSchema), createContent);

@@ -1,5 +1,6 @@
 import {EpisodeLists, Contents} from "../../models";
 
+//Obtener toda la lista de episodios
 export const getAllEpisodeList = async(req, res) => {
 
     try {
@@ -23,6 +24,7 @@ export const getAllEpisodeList = async(req, res) => {
     }
 }
 
+//Obtener un episodio por su id
 export const getEpisodeById = async(req, res) => {
     let id = req.params.id;
 
@@ -48,6 +50,7 @@ export const getEpisodeById = async(req, res) => {
     }
 }
 
+//Crear un nuevo episodio
 export const createEpisode = async (req, res) => {
     let seasonNum = req.body.seasonNum;
     let episodeName = req.body.episodeName;
@@ -99,6 +102,7 @@ export const createEpisode = async (req, res) => {
     }
 }
 
+//Actualizar un episodio por medio de su id y sus atributos
 export const updateEpisode = async(req, res) => {
     let id = req.params.id;
 
@@ -154,6 +158,7 @@ export const updateEpisode = async(req, res) => {
 
 }
 
+//Eliminar un episodio por medio de su id
 export const deleteEpisode = async(req, res) => {
     let id = req.params.id;
     try {

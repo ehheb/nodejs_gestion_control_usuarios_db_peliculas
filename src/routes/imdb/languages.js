@@ -4,6 +4,7 @@ import {validateName, createNameSchema, validateFindInUrl, findInUrl} from "../.
 import {getRole, isAdmin, isEditor, isUser} from "../../middlewares/roleAuth";
 
 const router = express.Router();
+
 //Rutas de los idiomas
 router.get("/languages", getRole, isUser, getAllLanguages);
 router.get("/languages/:id", getRole, isUser, validateFindInUrl(findInUrl), getLanguageById);

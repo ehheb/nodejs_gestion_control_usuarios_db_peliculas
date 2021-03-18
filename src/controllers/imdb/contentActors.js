@@ -1,5 +1,6 @@
 import {ContentActors, Actors, Contents} from "../../models";
 
+//Encontrar a todos los actores con relación a su contenido
 export const findAll = async(req, res) => {
     try {
         let results = await ContentActors.findAll({include:[Actors, Contents]});
@@ -16,6 +17,7 @@ export const findAll = async(req, res) => {
     }
 }
 
+//Encontrar a un actor y contenido con relación a sus id´s
 export const findContentActor = async(req, res) => {
     let actorId = req.params.actorId;
     let contentId = req.params.contentId;
@@ -64,6 +66,7 @@ export const findContentActor = async(req, res) => {
     }
 }
 
+//Añadir a un actor con relación a un contenido
 export const addContentActor = async (req, res) => {
     let actorId = req.body.actorId;
     let contentId = req.body.contentId;
@@ -122,6 +125,7 @@ export const addContentActor = async (req, res) => {
     }
 }
 
+//Actualizar a un actor con relación al contenido
 export const updateContentActor = async(req, res) => {
     let actorId = req.params.actorId;
     let contentId = req.params.contentId;
@@ -200,6 +204,7 @@ export const updateContentActor = async(req, res) => {
     }
 }
 
+//Eliminar a un actor con relación a un contenido
 export const deleteContentActor = async(req, res) => {
     let actorId = req.body.actorId;
     let contentId = req.body.contentId;

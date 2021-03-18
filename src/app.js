@@ -33,7 +33,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 const authJWT = { secret: process.env.SECRET_KEY, algorithms: ["HS256"]}
 
-//Esta ruta se tiene proteger, pero para realiar que el código esté funcionando eso se deja para despúes
+//Todas las rutas para la base de datos imdb
 app.use("/api/v1", actorsRoutes);
 app.use("/api/v1", directorsRoutes);
 app.use("/api/v1", contentTypesRoutes);
@@ -46,7 +46,7 @@ app.use("/api/v1", contentActorRoutes);
 app.use("/api/v1", contentDirectorRoutes);
 app.use("/api/v1", contentGenreRoutes)
 
-
+//Todas las rutas del signin, signup, addroles, resetpassword
 app.use("/api/v1",authRoutes);
 app.use("/api/v1", jwt(authJWT), userRoutes);
 app.use("/api/v1", jwt(authJWT), roleRoutes);

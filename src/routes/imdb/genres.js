@@ -4,6 +4,7 @@ import {validateName, createNameSchema, validateFindInUrl, findInUrl} from "../.
 import {getRole, isAdmin, isEditor, isUser} from "../../middlewares/roleAuth";
 
 const router = express.Router();
+
 //Rutas de los generos
 router.get("/genres", getRole, isUser, getAllGenres);
 router.get("/genres/:id", getRole, isUser, validateFindInUrl(findInUrl), getGenreById);

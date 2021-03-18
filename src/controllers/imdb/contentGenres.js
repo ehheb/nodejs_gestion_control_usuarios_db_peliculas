@@ -1,6 +1,6 @@
 import {ContentGenres, Genres, Contents} from "../../models";
 
-
+//Encontrar todos los géneros con relación al contenido
 export const findAll = async(req, res) => {
     try {
         let results = await ContentGenres.findAll({include:[Genres, Contents]});
@@ -17,6 +17,7 @@ export const findAll = async(req, res) => {
     }
 }
 
+//Encontrar un género y un contenido con relación a sus id´s
 export const findContentGenre = async(req, res) => {
     let genreId = req.params.genreId;
     let contentId = req.params.contentId;
@@ -65,6 +66,7 @@ export const findContentGenre = async(req, res) => {
     }
 }
 
+//Añadir un género a un contenido
 export const addContentGenre = async (req, res) => {
     let genreId = req.body.genreId;
     let contentId = req.body.contentId;
@@ -124,7 +126,7 @@ export const addContentGenre = async (req, res) => {
     }
 }
 
-
+//Actualizar un género con relación al contenido
 export const updateContentGenre = async(req, res) => {
     let genreId = req.params.genreId;
     let contentId = req.params.contentId;
@@ -203,6 +205,7 @@ export const updateContentGenre = async(req, res) => {
     }
 }
 
+//Eliminar un género con relación al contenido
 export const deleteContentGenre = async(req, res) => {
     let genreId = req.body.genreId;
     let contentId = req.body.contentId;
